@@ -36,23 +36,18 @@ public class LinkedListCycle_1 {
 
 }
 
-// Definition for singly-linked list.
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode() {}
-
-    ListNode(int x) {
-        val = x;
-        next = null;
-    }
-
-}
-
 class LinkedNode {
 
     ListNode head;
     ListNode tail;
+
+    public LinkedNode(){
+
+    }
+
+    public LinkedNode(ListNode node){
+        this.head=node;
+    }
 
     void addNode(int element){
         if (head==null){

@@ -13,7 +13,8 @@ public class MergeTwoSortedLists_3 {
 
     private static ListNode getLinkedNode() {
         LinkedNode listNode1= new LinkedNode();
-        listNode1.addNode(-9);
+        listNode1.addNode(1);
+        listNode1.addNode(2);
         listNode1.addNode(3);
 
         return listNode1.head;
@@ -22,17 +23,33 @@ public class MergeTwoSortedLists_3 {
 
     private static ListNode getLinkedNode2() {
         LinkedNode listNode2= new LinkedNode();
-        listNode2.addNode(5);
-        listNode2.addNode(7);
+        listNode2.addNode(1);
+        listNode2.addNode(2);
+        listNode2.addNode(4);
         return listNode2.head;
     }
 
     public static void main(String[] args) {
         ListNode list1 = getLinkedNode();
         ListNode list2 = getLinkedNode2();
-        ListNode mergeList=mergeTwoLists(list1,list2);
+        ListNode mergeList=mergeTwoListsRecursive(list1,list2);
         display(mergeList);
 
+    }
+
+
+    public static ListNode mergeTwoListsRecursive(ListNode list1, ListNode list2) {
+        if(list1 == null) return list2;
+        if(list2 == null) return list1;
+        ListNode temp;
+        if(list1.val < list2.val){
+            temp = list1;
+            temp.next = mergeTwoListsRecursive(list1.next,list2);
+        } else {
+            temp = list2;
+            temp.next = mergeTwoListsRecursive(list1,list2.next);
+        }
+        return temp;
     }
 
 

@@ -22,7 +22,23 @@ package com.leetcode.linkedlist;
 
 class MyLinkedList {
 
-    class Node {
+    /**
+     * Initialize your data structure here.
+     */
+
+
+    private Node head;
+    private Node tail;
+    private int size;
+
+
+    public MyLinkedList() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+    }
+
+    private class Node {
         Node next = null;
         int val = 0;
 
@@ -31,18 +47,6 @@ class MyLinkedList {
         }
     }
 
-    private Node head;
-    private Node tail;
-    private int size;
-
-    /**
-     * Initialize your data structure here.
-     */
-    public MyLinkedList() {
-        this.head = null;
-        this.tail = null;
-        this.size = 0;
-    }
 
     /**
      * Get the value of the index-th node in the linked list. If the index is invalid, return -1.
@@ -50,7 +54,7 @@ class MyLinkedList {
     public int get(int index) {
         if (index < 0 || index >= this.size) return -1;
 
-        Node curr = this.head;
+        Node curr = head;
         while (index-- > 0) {
             curr = curr.next;
         }

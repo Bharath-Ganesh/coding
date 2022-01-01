@@ -29,9 +29,8 @@ public class ReverseLinkedList_4 {
         if(head==null || head.next==null){
             return head;
         }
-        ListNode nextNode=head.next;
-        ListNode newHead=reverseList(nextNode);
-        nextNode.next=head;
+        ListNode newHead=reverseList(head.next);
+        head.next.next=head;
         head.next=null;
         return newHead;
     }

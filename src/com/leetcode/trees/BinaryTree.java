@@ -1,23 +1,7 @@
 package com.leetcode.trees;
 
 
-class TreeNode {
-    TreeNode left;
-    TreeNode right;
-    Integer val;
 
-    TreeNode(int val) {
-        this.left = null;
-        this.right = null;
-        this.val = val;
-    }
-
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-}
 
 
 public class BinaryTree {
