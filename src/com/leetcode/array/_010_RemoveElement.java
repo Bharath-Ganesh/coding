@@ -23,7 +23,7 @@ public class _010_RemoveElement {
         //[0,1,2,2,3,0,4,2]
         int nums[] = {0,1,2,2,3,0,4,2};
         int val = 2;
-        System.out.println(removeElement(nums,val));
+        System.out.println(removeElementLeetcode(nums,val));
         System.out.println(Arrays.toString(nums));
     }
 
@@ -36,6 +36,24 @@ public class _010_RemoveElement {
             }
         }
         return count;
+    }
+
+
+    public static int removeElementLeetcode(int[] nums, int val) {
+        int index=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]!=val){
+                swap(nums,index++,i);
+            }
+        }
+        return index;
+    }
+
+
+    private static void swap(int[] nums,int i,int j){
+        int temp=nums[j];
+        nums[j]=nums[i];
+        nums[i]=temp;
     }
 
 
