@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * Input: nums = [-1,0,1,2,-1,-4]
  * Output: [[-1,-1,2],[-1,0,1]]
  */
-public class _3Sum_47 {
+public class _047_3Sum {
 
     public static void main(String[] args) {
         int[] nums = {-1,0,1,2,-1,-4};

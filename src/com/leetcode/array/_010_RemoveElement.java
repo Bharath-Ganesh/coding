@@ -3,9 +3,11 @@ package com.leetcode.array;
 import java.util.Arrays;
 
 /**
+ * Leetcode : 27
  * Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The relative order of the elements may be changed.
 
- * Since it is impossible to change the length of the array in some languages, you must instead have the result be placed in the first part of the array nums. More formally, if there are k elements after removing the duplicates, then the first k elements of nums should hold the final result.
+ * Since it is impossible to change the length of the array in some languages, you must instead have the result be placed
+ * in the first part of the array nums. More formally, if there are k elements after removing the duplicates, then the first k elements of nums should hold the final result.
  * It does not matter what you leave beyond the first k elements.
  * Return k after placing the final result in the first k slots of nums.
  * Do not allocate extra space for another array. You must do this by modifying the input array in-place with O(1) extra memory.
@@ -16,7 +18,7 @@ import java.util.Arrays;
  Note that the five elements can be returned in any order.
  It does not matter what you leave beyond the returned k (hence they are underscores).
  */
-public class RemoveElement_10 {
+public class _010_RemoveElement {
     public static void main(String[] args) {
         //[0,1,2,2,3,0,4,2]
         int nums[] = {0,1,2,2,3,0,4,2};

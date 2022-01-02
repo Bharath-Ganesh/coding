@@ -11,7 +11,7 @@ import java.util.*;
  * Input: nums1 = [1,2,2,1], nums2 = [2,2]
  * Output: [2,2]
  */
-public class IntersectionOfTwoArrays_1 {
+public class _001_IntersectionOfTwoArrays {
 
     public static void main(String[] args) {
         int[] nums1 = {1,2,2,1};

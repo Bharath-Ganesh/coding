@@ -12,11 +12,15 @@ import java.util.Arrays;
  * Input: arr = [1,0,2,3,0,4,5,0]
  * Output: [1,0,0,2,3,0,0,4]
  * Explanation: After calling your function, the input array is modified to: [1,0,0,2,3,0,0,4]
+ *
+ *  Input: arr = [8,4,5,0,0,0,0,7]
+ *  Output:      [8,4,5,0,0,0,0,0]
+ *
  */
-public class DuplicateZeros_8 {
+public class _008_DuplicateZeros {
 
     public static void main(String[] args) {
-        int arr[] = {1, 0, 2, 3, 0, 4, 5, 0};
+        int arr[] = {8,4,5,0,0,0,0,7};
         duplicateZeroLeetcode(arr);
         System.out.println(Arrays.toString(arr));
     }
@@ -63,5 +67,8 @@ public class DuplicateZeros_8 {
             arr[increasedArrayLength]=arr[originalArrayLength];
         }
     }
+
+
+
 
 }

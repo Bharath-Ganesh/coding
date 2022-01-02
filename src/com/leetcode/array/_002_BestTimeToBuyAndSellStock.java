@@ -15,11 +15,14 @@ import java.util.Arrays;
  * Output: 5
  * Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
  * Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+ *
+ * Input: prices = [7,6,5,4,3,2,1]
+ * Output: 0
  */
-public class BestTimeToBuyAndSellStock_2 {
+public class _002_BestTimeToBuyAndSellStock {
 
     public static void main(String[] args) {
-        int[] prices = {7,1,5,3,6,4};
+        int[] prices = {7,6,5,4,3,2,1};
         int maxProfit = maxProfitLeetcode(prices);
         System.out.println(maxProfit);
     }
@@ -36,18 +39,12 @@ public class BestTimeToBuyAndSellStock_2 {
     }
 
     public static int maxProfitLeetcode(int[] prices) {
-        if (prices.length == 0) {
-            return 0 ;
-        }
-        int max = 0 ;
-        int sofarMin = prices[0] ;
-        for (int i = 0 ; i < prices.length ; ++i) {
-            if (prices[i] > sofarMin) {
-                max = Math.max(max, prices[i] - sofarMin) ;
-            } else{
-                sofarMin = prices[i];
-            }
-        }
-        return  max ;
+       int minPrice=prices[0];
+       int maxProfit=0;
+       for(int i=1;i<prices.length;i++){
+           maxProfit=Math.max(prices[i]-minPrice,maxProfit);
+           minPrice=Math.min(minPrice,prices[i]);
+       }
+       return maxProfit;
     }
 }

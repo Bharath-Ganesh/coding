@@ -9,7 +9,7 @@ package com.leetcode.array;
  * Output: 6
  * Explanation: [4,-1,2,1] has the largest sum = 6.
  */
-public class MaxSubarray_5 {
+public class _005_MaxSubarray {
 
 
     public static void main(String[] args) {

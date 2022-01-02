@@ -65,7 +65,7 @@ Arrays
 5. Maximum Subarray                                              : Leetcode : 53     : Easy 
 6. Valid Sudoku                                                  : Leetcode : 36     : Medium 
 7. Search a 2D Matrix                                            : Leetcode : 74     : Medium
-8. Duplicate Zeros                                               : Leetcode : 1089   : Easy
+8. Duplicate Zeros                                               : Leetcode : 1089   : Easy // Good problem
 9. Merge Sorted Array                                            : Leetcode : 88     : Easy
 10. Remove Element                                               : Leetcode : 27     : Easy
 11. Remove Duplicates from Sorted Array                          : Leetcode : 26     : Easy

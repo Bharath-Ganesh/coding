@@ -13,7 +13,7 @@ import java.util.List;
  * Input: numRows = 5
  * Output: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]
  */
-public class PascalTriangle_4 {
+public class _004_PascalTriangle {
 
     public static void main(String[] args) {
         int numRows = 5;

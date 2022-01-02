@@ -28,7 +28,7 @@ import java.util.Set;
  * ,['.','.','.','.','8','.','.','7','9']]
  * Output: true
  */
-public class ValidSudoku_6 {
+public class _006_ValidSudoku {
 
     public static void main(String[] args) {
         char[][] board =
@@ -125,10 +125,9 @@ public class ValidSudoku_6 {
                 if(cv!='.' && !col.add(cv)){
                     return false;
                 }
-
-                int rowIndex=3*(i/3);
-                int colIndex=3*(i%3);
-                Character bv=board[rowIndex+(j/3)][colIndex+(j%3)];
+                int row_value=3*(i/3);
+                int col_value=3*(i%3);
+                char bv = board[row_value + (j / 3)][col_value + (j % 3)];
                 if(bv!='.' && !box.add(bv)){
                     return false;
                 }

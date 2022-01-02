@@ -17,7 +17,7 @@ package com.leetcode.array;
  * Input: mat = [[1,2],[3,4]], r = 2, c = 4
  * Output: [[1,2],[3,4]]
  */
-public class ReshapeMatrix_3 {
+public class _003_ReshapeMatrix {
 
     public static void main(String[] args) {
         int[][] mat = {{1, 2,3}, {4, 5,6}};
@@ -54,13 +54,14 @@ public class ReshapeMatrix_3 {
     }
 
     public static int[][] matrixReshapeLeetCode(int[][] nums, int r, int c) {
-        int rows = nums.length, columns = nums[0].length;
-        if(nums.length*nums[0].length != r*c){
+        int rows=nums.length;
+        int cols=nums[0].length;
+        if(rows*cols!=r*c){
             return nums;
         }
-        int[][] result = new int[r][c];
-        for (int i=0;i<r*c;i++){
-            result[i/c][i%c]=nums[i/columns][i%columns];
+        int[][] result=new int[r][c];
+        for(int i=0;i<r*c;i++){
+            result[i/c][i%c]=nums[i/cols][i%cols];
         }
         return result;
     }
