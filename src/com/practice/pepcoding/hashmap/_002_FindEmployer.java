@@ -27,7 +27,7 @@ import java.util.Map;
  * F -> 5
  */
 
-public class FindEmployer_02 {
+public class _002_FindEmployer {
 
     public static void main(String args[]) {
         Map<String, String> employeeManager = new HashMap<>();

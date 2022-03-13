@@ -14,14 +14,14 @@ import java.util.Map;
  * Output
  * [5,11] : [-4, 6, 1, 2,  1, -3, 4]
  */
-public class LargestSubArrayWithZeroSum_05 {
+public class _005_LongestSubArrayWithZeroSum {
 
     public static void main(String[] args) {
         //            -------4-------|##sum-k; 11-7=4#########
         //index       0  1   2   3  4   5  6  7  8   9  10  11
         //sum-k      -5  3   0  -5 -3  -7 -1  0  2   3   0  4
         // sum        2  10  7   2  4   0  6  7  9   10  7  11
-        int[] arr = {2, 8, -3, -5, 2, -4, 6, 1, 2, 1, -3, 4};
+        int[] arr =  {2, 8, -3, -5, 2, -4, 6, 1, 2,  1, -3, 4};
         largestSubArrayWithSumZero(arr);
         int k = 7;
         largestSubArrayWithSumK(arr, k);

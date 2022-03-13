@@ -1,9 +1,6 @@
 package com.leetcode.array;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -24,28 +21,35 @@ public class _047_3Sum {
     }
 
     public static List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> result=new ArrayList<>();
-        Set<List<Integer>> set = new HashSet<>();
-        for(int i=0;i<nums.length;i++){
-            for(int j=i+1;j<nums.length;j++){
-                for(int k=j+1;k<nums.length;k++){
-                    if(i != j && j != k && i != k && nums[i]+nums[j]+nums[k] == 0){
-                        List<Integer> list=new ArrayList<>();
-                        list.add(nums[i]);
-                        list.add(nums[j]);
-                        list.add(nums[k]);
-                        set.add(sortTheList(list));
+        Arrays.sort(nums);
+        List<List<Integer>> result=new ArrayList();
+        for(int i=0;i<nums.length-2;i++){
+            if(i==0 || (i>0 && nums[i]!=nums[i-1])){
+                int low=i+1;
+                int high=nums.length-1;
+                int sum=-nums[i];
+                while(low<high){
+                    if(nums[low]+nums[high]==sum){
+                        result.add(Arrays.asList(nums[i],nums[low],nums[high]));
+                        while(low<high && nums[low]==nums[low+1]){
+                            low++;
+                        }
+
+                        while(low<high && nums[high]==nums[high-1]){
+                            high--;
+                        }
+                        low++;
+                        high--;
+                    }else if(nums[low]+nums[high]>sum){
+                        high--;
+                    }else{
+                        low++;
                     }
                 }
             }
         }
-        for(List<Integer> list : set){
-            result.add(list);
-        }
         return result;
     }
 
-    private static List<Integer>  sortTheList(List<Integer> list){
-        return list.stream().sorted().collect(Collectors.toList());
-    }
+
 }

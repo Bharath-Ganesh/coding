@@ -54,6 +54,14 @@ class LinkedNode {
     ListNode head;
     ListNode tail;
 
+    public LinkedNode(){
+
+    }
+
+    public LinkedNode(ListNode node){
+        this.head=node;
+    }
+
     void addNode(int element){
         if (head==null){
             ListNode tempNode=new ListNode(element);

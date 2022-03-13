@@ -15,7 +15,7 @@ import java.util.Map;
  */
 
 
-public class CheckIfPairsDivisibleByK_03 {
+public class _003_CheckIfPairsDivisibleByK {
 
 	public static void main(String[] args) {
 

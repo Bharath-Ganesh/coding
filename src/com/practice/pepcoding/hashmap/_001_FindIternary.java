@@ -14,7 +14,7 @@ import java.util.Map;
  * BOMBAY -> DELHI -> GOA -> CHENNAI -> BANGALORE
  */
 
-public class FindIternary_01 {
+public class _001_FindIternary {
 
     public static void main(String[] args) {
 

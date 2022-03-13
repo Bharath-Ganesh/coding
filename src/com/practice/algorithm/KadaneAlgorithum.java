@@ -16,20 +16,20 @@ import java.util.List;
 public class KadaneAlgorithum {
 
     public static void main(String[] args) {
-        int[] arr = {-2, -1, -8, -5, -112, -100, -8};
+        int[] arr = {-7 ,-8 ,-16 ,-4 ,-8 ,-5 ,-7 ,-11, -10, -12 ,-4 ,-6 ,-4 ,-16, -10 };
         KadaneAlgorithum kadaneAlgorithum = new KadaneAlgorithum();
-        Integer max_sum = kadaneAlgorithum.findMaxContigousSum(arr);
+        long max_sum = kadaneAlgorithum.findMaxContigousSum(arr);
         System.out.println(max_sum);
     }
 
     // Kadane's algorithm is used to find the max contiguous sum in an array in O(n)
-    private Integer findMaxContigousSum(int[] arr) {
+    private long findMaxContigousSum(int[] arr) {
 
-        int maxSoFar = arr[0];
-        int maxSum = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            maxSum = Math.max(maxSum + arr[i], arr[i]);
-            maxSoFar = Math.max(maxSoFar, maxSum);
+        long maxSum=arr[0];
+        long maxSoFar=arr[0];
+        for(int i=1;i<arr.length;i++){
+            maxSum=Math.max(maxSum+arr[i],arr[i]);
+            maxSoFar=Math.max(maxSoFar,maxSum);
         }
         return maxSoFar;
     }

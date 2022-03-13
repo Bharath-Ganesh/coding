@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * Write a function which takes an array and prints the majority element (if it
- * exists), otherwise prints “No Majority Element”. A majority element in an
+ * exists), otherwise prints ï¿½No Majority Elementï¿½. A majority element in an
  * array A[] of size n is an element that appears more than n/2 times (and hence
  * there is at most one such element).
  * 
@@ -23,7 +23,7 @@ import java.util.Map;
 public class MajorityElement {
 
 	public static void main(String[] args) {
-		int[] arr = { 3, 3, 4, 2, 4, 4, 2, 4 };
+		int[] arr = {3,2,3,2,2 };
 		int majorityElement = findMajorityElement(arr);
 		System.out.println(majorityElement);
 

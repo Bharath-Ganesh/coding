@@ -41,8 +41,8 @@ public class _006_ValidSudoku {
                 , {'.', '6', '.', '.', '.', '.', '2', '8', '.'}
                 , {'.', '.', '.', '4', '1', '9', '.', '.', '5'}
                 , {'.', '.', '.', '.', '8', '.', '.', '7', '9'}};
-        boolean isValid = isValidSudoku2(board);
-        System.out.println(isValid);
+        System.out.println(isValidSudokuLeetcode(board));
+        System.out.println(isValidSudoku(board));
 
 
     }
@@ -89,25 +89,32 @@ public class _006_ValidSudoku {
      * Ie 0,0 is start of first block, second block is 0,3 (not 0,1);
      *
      */
-    public static boolean isValidSudokuLeetCode(char[][] board) {
+    public static boolean isValidSudokuLeetcode(char[][] board) {
 
-       for (int i=0;i<board.length;i++){
-           Set<Character> row = new HashSet<>();
-           Set<Character> col = new HashSet<>();
-           Set<Character> box = new HashSet<>();
-           for (int j=0;j<board[0].length;j++){
-               if(board[i][j]!='.' && !row.add(board[i][j]))
-                   return false;
-               if(board[j][i]!='.' && !col.add(board[j][i]))
-                   return false;
-               int rowIndex=3*(i/3);
-               int colIndex=3*(i%3);
-               if(board[rowIndex+ j/3][colIndex+ j%3]!='.' && !box.add(board[rowIndex+ j/3][colIndex+ j%3])){
-                   return false;
-               }
-           }
-       }
-       return true;
+        for(int row=0;row<board.length;row++){
+            Set<Character> rowSet=new HashSet();
+            Set<Character> colSet=new HashSet();
+            Set<Character> boxSet=new HashSet();
+            for(int col=0;col<board[0].length;col++){
+
+                    if(board[row][col]!='.' && !rowSet.add(board[row][col])){
+                        return false;
+                    }
+
+                    if(board[col][row]!='.' && !colSet.add(board[col][row])){
+                        return false;
+                    }
+
+                    int rIndex= 3*(row/3);
+                    int cIndex= 3*(row%3);
+
+                    if(board[rIndex+(col/3)][cIndex+(col%3)]!='.' && !boxSet.add(board[rIndex+(col/3)][cIndex+(col%3)])){
+                        return false;
+                    }
+
+            }
+        }
+        return true;
     }
 
     public static boolean isValidSudoku2(char[][] board) {
