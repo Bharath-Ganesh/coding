@@ -2,6 +2,7 @@ package com.leetcode.array;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,49 +34,47 @@ class Pair {
 public class _097_FindAllElementAppearingMoreThanNByKTimes {
 
     public static void main(String[] args) {
-        int[] arr = {3,2,3,2,2 };
-        int k = 2;
-
+        int[] arr = {3, 1, 2, 2, 2, 1, 4, 3, 3};
+        int k = 4;
         System.out.println(moreThanNdK(arr, arr.length, k));
     }
 
     static List<Integer> moreThanNdK(int arr[], int n, int k) {
-
         Pair[] pairs = new Pair[k - 1];
         for (int i = 0; i < pairs.length; i++) {
-            pairs[i] = new Pair();
+            Pair pair = new Pair();
+            pairs[i] = pair;
         }
-
         for (int i = 0; i < arr.length; i++) {
-            int number = arr[i];
-            // If the element is already present in the list
-            int potentialCandidate;
-            for (potentialCandidate = 0; potentialCandidate < pairs.length; potentialCandidate++) {
-                if (number == pairs[potentialCandidate].element) {
-                    pairs[potentialCandidate].count += 1;
+            int num = arr[i];
+
+            int j;
+            for (j = 0; j < pairs.length; j++) {
+                if (pairs[j].element == num) {
+                    pairs[j].count++;
                     break;
                 }
             }
-
-            if (potentialCandidate == pairs.length) {
-                int l;
-                for (l = 0; l < pairs.length; l++) {
-                    if (pairs[l].count == 0) {
-                        pairs[l].element = number;
-                        pairs[l].count = 1;
+            //The current element is not present in the pairs array
+            if (j == pairs.length) {
+                for (j = 0; j < pairs.length; j++) {
+                    if (pairs[j].count == 0) {
+                        pairs[j].element = num;
+                        pairs[j].count++;
                         break;
                     }
                 }
 
-                if (l == pairs.length) {
-                    for (int j = 0; j < pairs.length; j++) {
-                        pairs[j].count -= 1;
+                //now the pairs array is full now we have to decrease the count of all the element by one
+                if (j == pairs.length) {
+                    for (j = 0; j < pairs.length; j++) {
+                        pairs[j].count--;
                     }
                 }
             }
         }
-        return isMajority(pairs, arr, k);
-
+        List<Integer> majority = isMajority(pairs, arr, k);
+        return majority;
     }
 
     private static List<Integer> isMajority(Pair[] pairs, int[] arr, int k) {

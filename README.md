@@ -1,4 +1,4 @@
-Arrays
+Find First and Last Position
 
 
 
@@ -168,6 +168,7 @@ Arrays
 102. Permutations                                                : Leetcode : 046    : Medium (F) 
 103. Grumpy Bookstore Owner                                      : Leetcode : 1052   : Medium 
 104. House Robber                                                : Leetcode : 198    : Medium
+105. 
 
 
 Binary Search and Sorting
@@ -219,16 +220,18 @@ Recursion
  
 
 Bits Manipulation
-1.  Single number 1                                               : Leetcode : 136    : Easy
-2.  Single number 2                                               : Leetcode : 137    : Medium        *** TRICKY***
-3.  Single number 3                                               : Leetcode : 138    : Medium
-4.  Find the difference                                           : Leetcode : 389    : Easy
-5.  Power of two                                                  : Leetcode : 231    : Easy 
-6.  XOR Queries of a Subarray                                     : Leetcode : 1310   : Medium
-7.  Copy Set Bits in range                                        : GFG      :        : Medium     // Pending
-8.  Count total set bits                                          : GFG      :        : Medium
-9.  Calculate squaure of a number without *,/,%                   : GFG      :        : Easy
-10. Divide Two Integers                                           : Leetcode : 29     : Medium
+1. Single number 1                                               : Leetcode : 136    : Easy
+2. Single number 2                                               : Leetcode : 137    : Medium        *** TRICKY***
+3. Single number 3                                               : Leetcode : 138    : Medium
+4. Find the difference                                           : Leetcode : 389    : Easy
+5. Power of two                                                  : Leetcode : 231    : Easy 
+6. XOR Queries of a Subarray                                     : Leetcode : 1310   : Medium
+7. Copy Set Bits in range                                        : GFG      :        : Medium     // Pending
+8. Count total set bits                                          : GFG      :        : Medium
+9. Calculate squaure of a number without *,/,%                   : GFG      :        : Easy
+10. Divide Two Integers                                          : Leetcode : 29     : Medium
+11. Power Sets                                                   : GFG      :        : Easy
+12. XOR of numbers from a to b                                   :          :        : Easy
 
 
 
@@ -271,6 +274,23 @@ Stack and Queues
 1. Valid Parentheses                                             : Leetcode : 20     : Easy
 2. Implement Queue using stack                                   : Leetcode : 232    : Easy
 3. Basic Calculator                                              : Leetcode : 224    : Hard
+4. Next Greater Element 2                                        : Leetcode : 503    : Medium
+5. Find if an expression has duplicate parenthesis or not        : GFG      :        : Medium 
+6. LRU Cache                                                     : Leetcode : 146    : Medium 
+7. Design a stack with operations on middle element              : GFG      :        : Medium
+8. Insert An Element At Its Bottom In A Given Stack              : Ninjas   :        : Easy
+9. Next Greater Element I                                        : Leetcode : 496    : Easy 
+10. Basic Calculator 2                                           : Leetcode : 227    : Medium
+11. Design a stack with operations on middle element             : GFG      :        : Medium
+12. Min Stack                                                    : Leetcode : 155    : Easy
+13. Prefix and Postfix Conversion                                : Practice :        : Medium
+14. Postfix to Infix Conversion                                  : Practice :        : Medium
+15. Basic Calculator 1                                           : Leetcode : 224    : Hard
+16. Basic Calculator 2                                           : Leetcode : 227    : Medium 
+17. Interleave the first half of the queue with second half      : GFG      :        : Medium
+18. Circular tour
+19. First negative integer in every window of size k             : GFG      :        : Medium 
+20. Sum of min and max elements of all subarrays of size k       : GFG      :        : Hard 
 
 
 Trees

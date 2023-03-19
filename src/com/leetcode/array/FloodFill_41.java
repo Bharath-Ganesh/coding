@@ -20,12 +20,35 @@ import java.util.Arrays;
 public class FloodFill_41 {
 
     public static void main(String[] args) {
-        int[][] image = {{0, 0, 0}, {0, 0, 0}};
+        int[][] image = {{0,0,0}, {0,0,0}};
         int row = 0, col = 0;
-        int newColor = 2;
-        int[][] output = floodFillLeetcode(image, row, col, newColor);
+        int newColor = 0;
+        int[][] output = floodFills(image, row, col, newColor);
         System.out.println(Arrays.deepToString(output));
 
+    }
+
+    public static int[][] floodFills(int[][] image, int sr, int sc, int color) {
+        int startColor=image[sr][sc];
+        dfs(image,sr,sc,startColor,color);
+        return image;
+    }
+
+    public static void dfs(int[][] image,int i,int j,int startColor,int color) {
+
+        if(i<0 || i>=image.length || j<0 || j>=image[0].length || image[i][j]!=startColor){
+            return;
+        }
+
+        if(image[i][j]==startColor){
+            image[i][j]=color;
+        }
+
+        // D, R , L, U
+        dfs(image,i+1,j,startColor,color);
+        dfs(image,i,j+1,startColor,color);
+        dfs(image,i,j-1,startColor,color);
+        dfs(image,i-1,j,startColor,color);
     }
 
 

@@ -14,9 +14,44 @@ import java.util.*;
  */
 public class _010_GroupAnagrams {
     public static void main(String[] args) {
-        String words[] = {"eat", "tea", "tan", "ate", "nat", "bat"};
-        System.out.println(groupAnagrams(words));
+        _010_GroupAnagrams obj = new _010_GroupAnagrams();
+        String words[] = {"bfj", "tro", "ffa", "rph"};
+        System.out.println(obj.Anagrams(words));
     }
+
+    public List<List<String>> Anagrams(String[] words) {
+        // Code here
+        List<List<String>> result = new ArrayList<>();
+        Map<String, List<String>> map = new HashMap<>();
+        for (String word : words) {
+            String key = constructFreqKey(word);
+            List<String> list = map.getOrDefault(key, new ArrayList<>());
+            list.add(word);
+            map.put(key, list);
+        }
+        for (Map.Entry<String, List<String>> mapEntry : map.entrySet()) {
+            if (mapEntry.getValue().size() > 1) {
+                Collections.sort(mapEntry.getValue());
+                result.add(mapEntry.getValue());
+            }
+        }
+        return result;
+    }
+
+    public String constructFreqKey(String word) {
+
+        Map<Character, Integer> map = new TreeMap<>();
+        for (int i = 0; i < word.length(); i++) {
+            Character ch = word.charAt(i);
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+        }
+        String key = "";
+        for (Map.Entry<Character, Integer> mapEntry : map.entrySet()) {
+            key += mapEntry.getKey() + "" + mapEntry.getValue();
+        }
+        return key;
+    }
+
 
     public static List<List<String>> groupAnagrams(String[] words) {
         List<List<String>> res = new ArrayList();

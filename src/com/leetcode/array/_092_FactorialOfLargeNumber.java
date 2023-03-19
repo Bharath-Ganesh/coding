@@ -19,23 +19,25 @@ public class _092_FactorialOfLargeNumber {
         System.out.println(factorial(n));
     }
 
-    private static ArrayList<Integer> factorial(int n) {
+    static ArrayList<Integer> factorial(int n){
         //code here
-
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(1);
-        int carry = 0;
-        for (int i = 2; i <= n; i++) {
-            for (int j = list.size() - 1; j >= 0; j--) {
-                int temp = list.get(j) * i + carry;
-                list.set(j, temp % 10);
-                carry =temp/ 10;
+        ArrayList<Integer> result=new ArrayList<>();
+        result.add(1);
+        for(int num=2;num<=n;num++){
+            int carry=0;
+            for(int j=result.size()-1;j>=0;j--){
+                int number=num*result.get(j)+carry;
+                result.set(j,(number%10));
+                carry=(number/10);
             }
-            while (carry != 0) {
-                list.add(0, carry % 10);
-                carry =carry/ 10;
+            while(carry!=0){
+                result.add(0,carry%10);
+                carry=carry/10;
             }
         }
-        return list;
+        return result;
+
     }
+
+
 }

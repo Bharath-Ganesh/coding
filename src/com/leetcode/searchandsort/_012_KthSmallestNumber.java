@@ -8,7 +8,7 @@ import java.util.*;
  * He thought he could solve any problem related to K th smallest number. His friend Pipi challenged him with a problem.
  * He gave him various ranges of number, These numbers were arranged in increasing order(only distinct numbers to be taken into account).
  * Now he asked him to find the K th smallest number in the sequence, again and again.
- *
+ * <p>
  * int[][] ranges={{1,3}, {5,7}, {6,9} , {2,1} , {12,15}}
  * int queue={1,4,6,19}
  */
@@ -30,7 +30,10 @@ public class _012_KthSmallestNumber {
     //  (1,5) (3,7) (6,9) (10,11)
     private static int[][] mergeIntervals(int[][] range) {
         List<int[]> list = new ArrayList<>();
-        Arrays.sort(range, Comparator.comparingInt(o -> o[0]));
+
+
+
+        Arrays.sort(range, Comparator.comparingInt(value -> value[0]));
 
         int start = range[0][0];
         int end = range[0][1];
@@ -43,8 +46,8 @@ public class _012_KthSmallestNumber {
                 end = interval[1];
             }
         }
-        list.add(new int[]{start, end});
-        return list.toArray(new int[0][]);
+        int[][] res = list.toArray(new int[0][]);
+        return res;
     }
 
     private static int[] findTheKThSmallestElement(int[][] mergeIntervals, int[] kThSmallest) {

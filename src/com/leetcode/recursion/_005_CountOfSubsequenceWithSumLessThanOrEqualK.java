@@ -18,7 +18,7 @@ package com.leetcode.recursion;
 public class _005_CountOfSubsequenceWithSumLessThanOrEqualK {
 
     public static void main(String[] args) {
-        int arr[] = {1, 2, 1}, sum = 3;
+        int arr[] = {25, 13, 40}, sum = 50;
         System.out.println(countOfSubsequenceWithSumLessThanOrEqualK(arr, sum));
     }
 
@@ -30,18 +30,16 @@ public class _005_CountOfSubsequenceWithSumLessThanOrEqualK {
     }
 
     private static int countOfSubsequenceWithSumLessThanOrEqualK(int[] arr, int sum, int currSum, int index) {
+
         if (index == arr.length) {
-            if (currSum <= sum) {
+            if (sum >= currSum) {
                 return 1;
             }
             return 0;
         }
-        currSum += arr[index];
-        int left = countOfSubsequenceWithSumLessThanOrEqualK(arr, sum, currSum, index + 1);
-
-        currSum -= arr[index];
-        int right = countOfSubsequenceWithSumLessThanOrEqualK(arr, sum, currSum, index + 1);
-        return left + right;
+        int left=countOfSubsequenceWithSumLessThanOrEqualK(arr,sum,currSum+arr[index],index+1);
+        int right=countOfSubsequenceWithSumLessThanOrEqualK(arr,sum,currSum,index+1);
+        return left+right;
     }
 
 

@@ -1,6 +1,7 @@
 package com.leetcode.recursion;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -19,22 +20,48 @@ public class _009_Subsets {
         System.out.println(subsets(nums));
     }
 
+//    public static List<List<Integer>> subsets(int[] nums) {
+//        List<List<Integer>> res = new ArrayList<>();
+//        subsets(nums, res, new ArrayList(), 0);
+//        return res;
+//    }
+//
+//    private static void subsets(int[] nums, List<List<Integer>> res, List<Integer> curr, int index) {
+//        if (index == nums.length) {
+//            res.add(new ArrayList(curr));
+//            return;
+//        }
+//
+//        curr.add(nums[index]);
+//        subsets(nums, res, curr, index + 1);
+//
+//        curr.remove(curr.size() - 1);
+//        subsets(nums, res, curr, index + 1);
+//    }
+
+
     public static List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        subsets(nums, res, new ArrayList(), 0);
+        List<List<Integer>> res=new ArrayList<>();
+        List<Integer> curr=new ArrayList<>();
+        int index=0;
+        subsets(res,curr,index,nums);
+        Arrays.sort(nums);
         return res;
+
     }
 
-    private static void subsets(int[] nums, List<List<Integer>> res, List<Integer> curr, int index) {
-        if (index == nums.length) {
+
+    public static void subsets(List<List<Integer>> res,List<Integer> curr,int index,int[] nums) {
+
+        if(index==nums.length){
             res.add(new ArrayList(curr));
             return;
         }
 
         curr.add(nums[index]);
-        subsets(nums, res, curr, index + 1);
+        subsets(res,curr,index+1,nums);
+        curr.remove(curr.size()-1);
+        subsets(res,curr,index,nums);
 
-        curr.remove(curr.size() - 1);
-        subsets(nums, res, curr, index + 1);
     }
 }

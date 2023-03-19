@@ -29,6 +29,8 @@ public class _006_AggressiveCows {
         System.out.println(aggressiveCows(arr, cows));
     }
 
+
+
     public static int aggressiveCows(ArrayList<Integer> stalls, int cows) {
         //    Write your code here.
         Collections.sort(stalls);

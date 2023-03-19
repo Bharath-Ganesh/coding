@@ -111,6 +111,8 @@ public class _012_NQueens {
         }
         return true;
     }
+
+
 }
 
 

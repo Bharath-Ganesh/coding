@@ -1,8 +1,6 @@
 package com.leetcode.recursion;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * https://leetcode.com/problems/permutations/
@@ -17,10 +15,34 @@ import java.util.List;
 public class _011_Permutations {
     public static void main(String[] args) {
         int[] nums = {1, 2, 3};
-        System.out.println(permuteExtraSpace(nums));
+       // System.out.println(permuteExtraSpace(nums));
         System.out.println(permute(nums));
     }
 
+
+//    public static List<List<Integer>> permute(int[] nums) {
+//        List<List<Integer>> res=new ArrayList<>();
+//        Set<Integer> set=new HashSet<>();
+//        permute(nums,res,set,new ArrayList<>());
+//        return res;
+//    }
+//
+//
+//    public static void permute(int[] nums, List<List<Integer>> res, Set<Integer> set, List<Integer> currList) {
+//        if(currList.size()==nums.length){
+//            res.add(new ArrayList<>(currList));
+//            return;
+//        }
+//
+//        for(int i=0;i<nums.length;i++){
+//            if(set.add(nums[i])){
+//                currList.add(nums[i]);
+//                permute(nums,res,set,currList);
+//                set.remove(nums[i]);
+//                currList.remove(currList.size()-1);
+//            }
+//        }
+//    }
 
     public static List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> res = new ArrayList();

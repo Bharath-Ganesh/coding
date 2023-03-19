@@ -16,25 +16,23 @@ import java.util.List;
 public class _074_MajorityElement2 {
 
     public static void main(String[] args) {
-        int[] nums={3,2,3,2,2};
+        int[] nums={3,2,3};
         System.out.println(majorityElement(nums));
     }
 
     public static List<Integer> majorityElement(int[] nums) {
-        if(nums.length==1){
-            List<Integer> res=new ArrayList<>();
-            res.add(nums[0]);
-            return res;
-        }
-        int element1=Integer.MIN_VALUE;
-        int element2=Integer.MIN_VALUE;
-        int counter1=0;
+
+        //here the first element is assigned to num1
+        Integer element1=nums[0];
+        // the second element could be any value which is not equal to num1
+        Integer element2=element1+1;
+        int counter1=1;
         int counter2=0;
         for(int i=0;i<nums.length;i++){
             int num=nums[i];
-            if(num==element1){
+            if(element1!=null && num==element1){
                 counter1++;
-            }else if(num==element2){
+            }else if(element2!=null && num==element2){
                 counter2++;
             }else if(counter1==0){
                 counter1=1;
@@ -52,20 +50,17 @@ public class _074_MajorityElement2 {
 
     }
 
-    private static List<Integer> isMajority(int[] nums,int element1,int element2){
+    private static List<Integer> isMajority(int[] nums,Integer element1,Integer element2){
         int counter1=0;
         int counter2=0;
         List<Integer> res=new ArrayList<>();
         for(int i=0;i<nums.length;i++){
-            counter1=element1==nums[i]?counter1+1:counter1;
-            counter2=element2==nums[i]?counter2+1:counter2;
+                counter1=element1==nums[i]?counter1+1:counter1;
+                counter2=element2==nums[i]?counter2+1:counter2;
         }
-
         if(counter1>(nums.length/3)){
             res.add(element1);
         }
-
-
         if(counter2>(nums.length/3)){
             res.add(element2);
         }

@@ -39,47 +39,93 @@ import java.util.Arrays;
 public class _005_AllocateMinNumberOfPages {
 
     public static void main(String[] args) {
-        int arr[] = {5,6,7,8,9,1,2,3,4};
-        int students = 9;
+        int arr[] = {12 ,34 ,67, 90};
+        int students = 5;
         System.out.println(findPages(arr, arr.length, students));
     }
 
-    public static int findPages(int[] arr, int N, int students) {
+    public static int findPages(int[] arr,int N,int m)
+    {
         //Your code here
-        int minPages = findPartition(arr, students);
-        return minPages;
-    }
+        int low=0;
+        int high=0;
+        for(int num : arr){
+            low=Math.max(low,num);
+            high+=num;
+        }
 
-
-    public static int findPartition(int[] arr, int students) {
-        int start = 0;
-        int end = Arrays.stream(arr).sum();
-        int minPages = -1;
-        while (start <= end) {
-            int mid = (end - start) / 2 + start;
-            if (isPossible(arr, students, mid)) {
-                minPages = mid;
-                end = mid - 1;
-            } else {
-                start = mid + 1;
+        if(m>N){
+            return -1;
+        }
+        int ans=-1;
+        while(low<=high){
+            int pages=(high-low)/2+low;
+            if(isPossible(pages,arr,m)){
+                ans=pages;
+                high=pages-1;
+            }else{
+                low=pages+1;
             }
         }
-        return minPages;
+        return ans;
     }
 
-    public static boolean isPossible(int[] arr, int students, int partition) {
-        int minStudents = 1;
-        int pages = 0;
-        for (int i = 0; i < arr.length; i++) {
-            pages += arr[i];
-            if (partition < pages) {
-                minStudents += 1;
-                if (minStudents > students || arr[i] > partition) {
-                    return false;
-                }
-                pages = arr[i];
+    private static boolean isPossible(int minPages,int[] arr,int students){
+
+        int totalPage=0;
+        int totalStudents=1;
+        for(int page : arr){
+            totalPage+=page;
+            if(totalPage>minPages){
+                totalStudents+=1;
+                totalPage=page;
+            }
+
+            if(totalStudents>students){
+                return false;
             }
         }
         return true;
     }
+
+//    public static int findPages(int[] arr, int N, int students) {
+//        //Your code here
+//        int minPages = findPartition(arr, students);
+//        return minPages;
+//    }
+//
+//
+//
+//
+//    public static int findPartition(int[] arr, int students) {
+//        int start = 0;
+//        int end = Arrays.stream(arr).sum();
+//        int minPages = -1;
+//        while (start <= end) {
+//            int mid = (end - start) / 2 + start;
+//            if (isPossible(arr, students, mid)) {
+//                minPages = mid;
+//                end = mid - 1;
+//            } else {
+//                start = mid + 1;
+//            }
+//        }
+//        return minPages;
+//    }
+//
+//    public static boolean isPossible(int[] arr, int students, int partition) {
+//        int minStudents = 1;
+//        int pages = 0;
+//        for (int i = 0; i < arr.length; i++) {
+//            pages += arr[i];
+//            if (partition < pages) {
+//                minStudents += 1;
+//                if (minStudents > students || arr[i] > partition) {
+//                    return false;
+//                }
+//                pages = arr[i];
+//            }
+//        }
+//        return true;
+//    }
 }

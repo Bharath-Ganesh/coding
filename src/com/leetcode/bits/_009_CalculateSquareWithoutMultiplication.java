@@ -18,25 +18,21 @@ public class _009_CalculateSquareWithoutMultiplication {
 
     // Driver code
     public static void main(String[] args) {
-        int n=11;
+        int n = -11;
         System.out.println(square(n));
     }
 
     public static int square(int n) {
-
-        int square=0;
-        if(n<0){
-            n=Math.abs(n);
-        }
-
-        int position=0;
-        int num=n;
-        while (num!=0){
-            if((1&num)==1){
-                square+=n<<position;
+        int square = 0;
+        n = Math.abs(n);
+        int temp = n;
+        int pos = 0;
+        while (temp != 0) {
+            if ((temp & 1) == 1) {
+                square += n << pos;
             }
-            position++;
-            num=num>>1;
+            pos++;
+            temp = temp >> 1;
         }
         return square;
     }

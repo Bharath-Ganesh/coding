@@ -1,6 +1,7 @@
 package com.leetcode.recursion;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * https://practice.geeksforgeeks.org/problems/rat-in-a-maze-problem/1
@@ -31,98 +32,135 @@ public class _015_RatInAMaze {
                 {1, 1, 0, 1},
                 {1, 1, 0, 0},
                 {0, 1, 1, 1}};
+        int[][] mat2 = {{1, 0,},{1,1}};
        // System.out.println(findPath(matrix, matrix.length));
-        System.out.println(findPathOptimum(matrix, matrix.length));
+        System.out.println(findPath(mat2, mat2.length));
     }
 
-    public static ArrayList<String> findPathOptimum(int[][] matrix, int n) {
+    public static ArrayList<String> findPath(int[][] mat, int n) {
         // Your code here
-        ArrayList<String> res = new ArrayList<>();
-        int row = 0, col = 0;
-        if (matrix[row][col] == 0) {
+        int[] di={1,0,0,-1};
+        int[] dj={0,-1,1,0};
+        ArrayList<String> res=new ArrayList<>();
+        boolean[][] visited=new boolean[n][n];
+        for(boolean[] arr : visited){
+            Arrays.fill(arr,false);
+        }
+        if(mat[0][0]==0 || mat[n-1][n-1]==0){
             return res;
         }
-        boolean[][] visited = new boolean[matrix.length][matrix[0].length];
-        int[] i = {1, 0, 0, -1};
-        int[] j = {0, -1, 1, 0};
-        String path = "";
-        findPathOptimum(matrix, res, row, col, i, j, path, visited);
+        findPath(di,dj,res,"",0,0,visited,mat);
         return res;
-
     }
 
-    public static void findPathOptimum(int[][] matrix, ArrayList<String> res, int row, int col, int[] down, int[] up, String path, boolean[][] visited) {
-        if (row == matrix.length - 1 && col == matrix[0].length - 1) {
+    public static void findPath(int[] di,int[] dj,ArrayList<String> res,String path,int rIndex,int cIndex,boolean[][] visited,int[][] mat) {
+
+        if(rIndex==mat.length-1 && cIndex==mat.length-1){
             res.add(path);
             return;
         }
-
+        // DLRU
         String direction = "DLRU";
-        for (int i = 0; i < 4; i++) {
-            int rIndex = row + down[i];
-            int cIndex = col + up[i];
+        for(int i=0;i<4;i++){
+            int row=rIndex+di[i];
+            int col=cIndex+dj[i];
             Character ch = direction.charAt(i);
-            if (isSafe(rIndex, cIndex, visited, matrix)) {
-                visited[row][col] = true;
-                findPathOptimum(matrix, res, rIndex, cIndex, down, up, path + ch, visited);
-                visited[row][col] = false;
+            if(row>=0 && row<mat.length && col>=0 && col<mat.length && visited[row][col]==false && mat[row][col]==1){
+                visited[rIndex][cIndex]=true;
+                findPath(di,dj,res,path+ch,row,col,visited,mat);
+                visited[rIndex][cIndex]=false;
             }
         }
     }
 
-    public static ArrayList<String> findPath(int[][] matrix, int n) {
-        // Your code here
-        ArrayList<String> res = new ArrayList<>();
-        int row = 0, col = 0;
-        if (matrix[row][col] == 0) {
-            return res;
-        }
-        boolean[][] visited = new boolean[matrix.length][matrix[0].length];
-        String path = "";
-        findPath(matrix, res, row, col, path, visited);
-        return res;
-
-    }
-
-    public static void findPath(int[][] matrix, ArrayList<String> res, int row, int col, String path, boolean[][] visited) {
-        if (row == matrix.length - 1 && col == matrix[0].length - 1) {
-            res.add(path);
-            return;
-        }
-
-
-        //downward
-        if (isSafe(row + 1, col, visited, matrix)) {
-            visited[row][col] = true;
-            findPath(matrix, res, row + 1, col, path + "D", visited);
-            visited[row][col] = false;
-        }
-        //Left
-        if (isSafe(row, col - 1, visited, matrix)) {
-            visited[row][col] = true;
-            findPath(matrix, res, row, col - 1, path + "L", visited);
-            visited[row][col] = false;
-        }
-        //right
-        if (isSafe(row, col + 1, visited, matrix)) {
-            visited[row][col] = true;
-            findPath(matrix, res, row, col + 1, path + "R", visited);
-            visited[row][col] = false;
-        }
-        //up
-        if (isSafe(row - 1, col, visited, matrix)) {
-            visited[row][col] = true;
-            findPath(matrix, res, row - 1, col, path + "U", visited);
-            visited[row][col] = false;
-        }
-    }
-
-    private static boolean isSafe(int row, int col, boolean[][] visited, int[][] matrix) {
-        if ((row < 0 || col < 0 || col >= matrix.length || row >= matrix.length) || matrix[row][col] == 0 || visited[row][col] == true) {
-            return false;
-        }
-        return true;
-    }
+//    public static ArrayList<String> findPathOptimum(int[][] matrix, int n) {
+//        // Your code here
+//        ArrayList<String> res = new ArrayList<>();
+//        int row = 0, col = 0;
+//        if (matrix[row][col] == 0) {
+//            return res;
+//        }
+//        boolean[][] visited = new boolean[matrix.length][matrix[0].length];
+//        int[] i = {1, 0, 0, -1};
+//        int[] j = {0, -1, 1, 0};
+//        String path = "";
+//        findPathOptimum(matrix, res, row, col, i, j, path, visited);
+//        return res;
+//
+//    }
+//
+//    public static void findPathOptimum(int[][] matrix, ArrayList<String> res, int row, int col, int[] down, int[] up, String path, boolean[][] visited) {
+//        if (row == matrix.length - 1 && col == matrix[0].length - 1) {
+//            res.add(path);
+//            return;
+//        }
+//
+//        String direction = "DLRU";
+//        for (int i = 0; i < 4; i++) {
+//            int rIndex = row + down[i];
+//            int cIndex = col + up[i];
+//            Character ch = direction.charAt(i);
+//            if (isSafe(rIndex, cIndex, visited, matrix)) {
+//                visited[row][col] = true;
+//                findPathOptimum(matrix, res, rIndex, cIndex, down, up, path + ch, visited);
+//                visited[row][col] = false;
+//            }
+//        }
+//    }
+//
+//    public static ArrayList<String> findPath(int[][] matrix, int n) {
+//        // Your code here
+//        ArrayList<String> res = new ArrayList<>();
+//        int row = 0, col = 0;
+//        if (matrix[row][col] == 0) {
+//            return res;
+//        }
+//        boolean[][] visited = new boolean[matrix.length][matrix[0].length];
+//        String path = "";
+//        findPath(matrix, res, row, col, path, visited);
+//        return res;
+//
+//    }
+//
+//    public static void findPath(int[][] matrix, ArrayList<String> res, int row, int col, String path, boolean[][] visited) {
+//        if (row == matrix.length - 1 && col == matrix[0].length - 1) {
+//            res.add(path);
+//            return;
+//        }
+//
+//
+//        //downward
+//        if (isSafe(row + 1, col, visited, matrix)) {
+//            visited[row][col] = true;
+//            findPath(matrix, res, row + 1, col, path + "D", visited);
+//            visited[row][col] = false;
+//        }
+//        //Left
+//        if (isSafe(row, col - 1, visited, matrix)) {
+//            visited[row][col] = true;
+//            findPath(matrix, res, row, col - 1, path + "L", visited);
+//            visited[row][col] = false;
+//        }
+//        //right
+//        if (isSafe(row, col + 1, visited, matrix)) {
+//            visited[row][col] = true;
+//            findPath(matrix, res, row, col + 1, path + "R", visited);
+//            visited[row][col] = false;
+//        }
+//        //up
+//        if (isSafe(row - 1, col, visited, matrix)) {
+//            visited[row][col] = true;
+//            findPath(matrix, res, row - 1, col, path + "U", visited);
+//            visited[row][col] = false;
+//        }
+//    }
+//
+//    private static boolean isSafe(int row, int col, boolean[][] visited, int[][] matrix) {
+//        if ((row < 0 || col < 0 || col >= matrix.length || row >= matrix.length) || matrix[row][col] == 0 || visited[row][col] == true) {
+//            return false;
+//        }
+//        return true;
+//    }
 
 
 }

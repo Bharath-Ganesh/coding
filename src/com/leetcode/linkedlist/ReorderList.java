@@ -5,62 +5,56 @@ public class ReorderList {
 
     public static void main(String[] args) {
         ListNode list1 = getLinkedNode();
-       reorderList(list1);
+        reorderList(list1);
         display(list1);
     }
 
     public static void reorderList(ListNode head) {
-        ListNode middle=middleNode(head);
-        ListNode secondHead=reverseList(middle);
-        ListNode headFirst=head;
-        while(headFirst!=null && secondHead!=null){
-            ListNode temp=headFirst.next;
-            headFirst.next=secondHead;
-            headFirst=temp;
-            temp=secondHead.next;
-
-            if(temp==null){
-                break;
-            }
-            secondHead.next=headFirst;
-            secondHead=temp;
-
+        if (head == null || head.next == null) {
+            return;
         }
 
-//        if(headFirst!=null){
-//            headFirst.next=null;
-//        }
-    }
+        ListNode mid = findMiddleNode(head);
+        ListNode second = reverseList(mid);
+        ListNode first = head;
 
+        while (first != null && second != null) {
+            ListNode next = first.next;
+            first.next = second;
+            first = next;
 
-
-
-    public static ListNode middleNode(ListNode head) {
-        ListNode slow=head;
-        ListNode fast=head;
-
-        while(fast!=null && fast.next!=null){
-            slow=slow.next;
-            fast=fast.next.next;
+            next = second.next;
+            second.next = first;
+            second = next;
         }
-        return slow;
-    }
 
+        if (first != null) {
+            first.next = null;
+        }
+    }
 
     public static ListNode reverseList(ListNode head) {
-        if(head==null || head.next==null){
+        if (head == null || head.next == null) {
             return head;
         }
-        ListNode currNode=head;
-        ListNode prev=null;
+        ListNode nextNode = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return nextNode;
+    }
 
-        while(currNode!=null){
-            ListNode nextNode=currNode.next;
-            currNode.next=prev;
-            prev=currNode;
-            currNode=nextNode;
+    public static ListNode findMiddleNode(ListNode head) {
+
+        if (head == null) {
+            return head;
         }
-        return prev;
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
     }
 
     static void display(ListNode head) {
@@ -79,6 +73,7 @@ public class ReorderList {
         listNode1.addNode(2);
         listNode1.addNode(3);
         listNode1.addNode(4);
+        listNode1.addNode(5);
 
         return listNode1.head;
     }

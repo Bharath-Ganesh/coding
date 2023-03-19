@@ -31,13 +31,13 @@ public class _088_RearrangeArrayAlternatively {
      */
     public static void rearrangeKeepingOrderOfAppearance(int arr[]) {
 
-        for (int i=0;i<arr.length;i++){
-            if(ifElementsOutOfPlace(arr[i],i)){
-                int index=oppositeIndex(arr[i],i,arr);
-                if(index!=-1){
-                    rotateSubarray(arr,i,index);
-                    rotateSubarray(arr,i+1,index);
-                }else{
+        for (int i = 0; i < arr.length; i++) {
+            if (ifElementsOutOfPlace(arr[i], i)) {
+                int index = oppositeIndex(arr[i], i, arr);
+                if (index != -1) {
+                    rotateSubarray(arr, i, index);
+                    rotateSubarray(arr, i + 1, index);
+                } else {
                     return;
                 }
             }
@@ -45,33 +45,30 @@ public class _088_RearrangeArrayAlternatively {
 
     }
 
-    private static int oppositeIndex(int element,int start,int[] arr){
-        if(element==0){
-            for(int i=start+1;i<arr.length;i++){
-                if(arr[i]<0){
-                    return i;
-                }
-            }
-        }else{
-            for (int i=start+1;i<arr.length;i++){
-                if(arr[i]*element<0){
-                    return i;
-                }
+    private static int oppositeIndex(int element, int start, int[] arr) {
+        boolean searchPositive = true;
+        if (element >= 0) {
+            searchPositive = false;
+        }
+        for (int i = start + 1; i < arr.length; i++) {
+            if (searchPositive && arr[i] > 0) {
+                return i;
+            } else if (!searchPositive && arr[i] < 0) {
+                return i;
             }
         }
         return -1;
-
     }
 
     public static void rotateSubarray(int[] arr, int start, int end) {
         while (start < end) {
-            swap(arr,start,end);
+            swap(arr, start, end);
             start++;
             end--;
         }
     }
 
-    private static void swap(int[] arr, int start, int end){
+    private static void swap(int[] arr, int start, int end) {
         int temp = arr[start];
         arr[start] = arr[end];
         arr[end] = temp;

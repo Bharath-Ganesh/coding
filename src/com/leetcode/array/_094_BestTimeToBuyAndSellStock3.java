@@ -1,5 +1,7 @@
 package com.leetcode.array;
 
+import java.util.ArrayList;
+
 /**
  * 123. Best Time to Buy and Sell Stock III
  * You are given an array prices where prices[i] is the price of a given stock on the ith day.
@@ -16,33 +18,40 @@ package com.leetcode.array;
 public class _094_BestTimeToBuyAndSellStock3 {
 
     public static void main(String[] args) {
-        int[] arr = {1,2,3,4,5};
+        int[] arr = {3, 3, 5, 0, 0, 3, 1, 4};
         System.out.println(maxProfit(arr));
     }
 
     public static int maxProfit(int[] prices) {
+
+        //Two transactions are allowed
+        // So we divide the problems into two subparts
         int maxProfit = 0;
-        int minBuyPrice=prices[0];
-        int[] sellPrices=new int[prices.length];
-        sellPrices[0]=0;
-        for(int i=1;i<prices.length;i++){
-            minBuyPrice=Math.min(minBuyPrice,prices[i]);
-            sellPrices[i]=Math.max(prices[i]-minBuyPrice,sellPrices[i-1]);
+        //1 transaction => For any particular day, if it's mandatory to sell the stock
+        // then we would look to the left(past prices) to find the minimum buy price
+        int sp[] = new int[prices.length];
+        ;
+        int minBuyPrice = prices[0];
+        for (int i = 1; i < prices.length; i++) {
+            minBuyPrice = Math.min(minBuyPrice, prices[i]);
+            sp[i] = Math.max(prices[i] - minBuyPrice,sp[i-1]);
         }
 
 
-        int[] buyPrices=new int[prices.length];
-        int maxSoldPrice=prices[prices.length-1];
-        buyPrices[prices.length-1]=0;
-        for(int i=prices.length-2;i>=0;i--){
-            maxSoldPrice=Math.max(maxSoldPrice,prices[i]);
-            buyPrices[i]=Math.max(maxSoldPrice-prices[i],buyPrices[i+1]);
+        // 2 transaction => For any particular day, if it's mandatory to buy the stock
+        // then we would look to the right(future prices) to find the maximum selling price
+        int bp[] = new int[prices.length];
+        int maxSellingPrice = prices[prices.length - 1];
+        maxProfit = 0;
+        for (int i = prices.length - 2; i >= 0; i--) {
+            maxSellingPrice = Math.max(maxSellingPrice, prices[i]);
+            bp[i] = Math.max(maxSellingPrice - prices[i],bp[i+1]);
         }
 
-        for(int i=0;i<prices.length;i++){
-            maxProfit=Math.max(buyPrices[i]+sellPrices[i],maxProfit);
+
+        for (int i = 0; i < prices.length; i++) {
+            maxProfit = Math.max(maxProfit, bp[i] + sp[i]);
         }
         return maxProfit;
-
     }
 }

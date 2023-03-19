@@ -1,5 +1,10 @@
 package com.practice.pepcoding.string;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Given a string. Input="aaabbbccdeef" CompressionOne => Output=a3b3c2de2f
  * CompressionTwo => Output=abcdef
@@ -17,7 +22,8 @@ public class StringCompression {
 	 * @return
 	 */
 	public static String stringCompressionOne(String inputString) {
-
+		Integer[] res=new Integer[2];
+		Arrays.asList(res);
 		String newString = inputString.substring(0, 1);
 		int count = 1;
 		for (int i = 0; i < inputString.length() - 1; i++) {

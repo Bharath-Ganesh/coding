@@ -1,6 +1,9 @@
 package com.leetcode.linkedlist;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 class Solution {
 
     static class LinkedList {
@@ -55,6 +58,34 @@ class Solution {
                 }
             }
         }
+    }
+
+    public String FirstNonRepeatingList(String A) {
+        List<Character> dl = new ArrayList<Character>();
+        boolean[] repeated = new boolean[26];
+        StringBuilder s = new StringBuilder();
+        int x;
+        for (char ch : A.toCharArray()) {
+            x = ch - 'a';
+            // repeated[x] is true if x is repeated two or more
+            // times. If x is not seen so far or x is seen only
+            // once. then repeated[x] is false
+            if (!repeated[x]) {
+                //if dl does not contains ch,add it else remove it from dl and make it true in repeated
+                //denoting ch has appeared more than 1 time
+                if (!dl.contains(ch))
+                    dl.add(ch);
+                else {
+                    dl.remove((Character) ch);
+                    repeated[x] = true;
+                }
+            }
+            if (dl.size() != 0)
+                s.append(dl.get(0));
+            else
+                s.append('#');
+        }
+        return s.toString();
     }
 
     public String FirstNonRepeating(String word) {

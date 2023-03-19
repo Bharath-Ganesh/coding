@@ -19,21 +19,21 @@ public class _013_PrintAllSubsequenceOfStrings {
 
     public static void main(String[] args) {
         String word = "abc";
-        System.out.println(printAllSubsequenceOfStrings(word));
+        List<String> result = new ArrayList<>();
+        printAllSubsequenceOfStrings(word, new StringBuilder(), result, 0);
+        System.out.println(result);
     }
 
-    private static List<String> printAllSubsequenceOfStrings(String word) {
-        List<String> res = new ArrayList<>();
-        int numberOfSubsequence = (1 << word.length()) - 1;
-        for (int i = 1; i <= numberOfSubsequence; i++) {
-            StringBuilder currWord = new StringBuilder();
-            for (int num = 0; num < word.length(); num++) {
-                if ((i & (1 << num)) != 0) {
-                    currWord.append(word.charAt(num));
-                }
+    private static void printAllSubsequenceOfStrings(String word, StringBuilder currString, List<String> result, int index) {
+        if (index == word.length()) {
+            if(currString.length()!=0){
+                result.add(currString.toString());
             }
-            res.add(currWord.toString());
+            return;
         }
-        return res;
+        currString.append(word.charAt(index));
+        printAllSubsequenceOfStrings(word, currString, result, index + 1);
+        currString.deleteCharAt(currString.length()-1);
+        printAllSubsequenceOfStrings(word, currString, result, index + 1);
     }
 }

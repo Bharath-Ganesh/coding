@@ -22,32 +22,57 @@ import java.util.List;
 public class _016_PermutationInSequence {
 
     public static void main(String[] args) {
-        int n = 4, k = 9;
+        int n = 1, k = 1;
         System.out.println(getPermutation(n, k));
     }
 
     public static String getPermutation(int n, int k) {
-        List<Integer> numbers = new ArrayList();
-        int factorial = 1;
-        for (int i = 1; i < n; i++) {
-            numbers.add(i);
-            factorial *= i;
-        }
-        numbers.add(n);
-        k = k - 1;
 
-        StringBuilder ans = new StringBuilder();
-        while (true) {
-            if (numbers.size() == 1) {
-                ans.append(numbers.get(0));
+        List<Integer> nums=new ArrayList<>();
+        int fact=1;
+        for(int i=1;i<=n;i++){
+            fact=fact*i;
+            nums.add(i);
+        }
+        fact=fact/n;
+        k=k-1;
+        String permutation="";
+        while(true){
+            if(nums.size()==1){
+                permutation+=nums.get(0);
                 break;
             }
-            ans.append(numbers.get(k / factorial));
-            numbers.remove(k / factorial);
-            k = k % factorial;
-            n = n - 1;
-            factorial = factorial / n;
+            int q=k/fact;
+            permutation+=nums.get(q);
+            nums.remove(q);
+            k=k%fact;
+            fact=fact/(--n);
         }
-        return ans.toString();
+        return permutation;
     }
+
+//    public static String getPermutation(int n, int k) {
+//        List<Integer> numbers = new ArrayList();
+//        int factorial = 1;
+//        for (int i = 1; i < n; i++) {
+//            numbers.add(i);
+//            factorial *= i;
+//        }
+//        numbers.add(n);
+//        k = k - 1;
+//
+//        StringBuilder ans = new StringBuilder();
+//        while (true) {
+//            if (numbers.size() == 1) {
+//                ans.append(numbers.get(0));
+//                break;
+//            }
+//            ans.append(numbers.get(k / factorial));
+//            numbers.remove(k / factorial);
+//            k = k % factorial;
+//            n = n - 1;
+//            factorial = factorial / n;
+//        }
+//        return ans.toString();
+//    }
 }

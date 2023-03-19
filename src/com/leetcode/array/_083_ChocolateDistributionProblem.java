@@ -30,11 +30,20 @@ public class _083_ChocolateDistributionProblem {
     public static long findMinDiff (List<Long> arr, long n, long m)
     {
         // your code here
-        long minDiff=Long.MAX_VALUE;
-        int window=(int)m;
+//        long minDiff=Long.MAX_VALUE;
+//        int window=(int)m;
+//        Collections.sort(arr);
+//        for(int i=window-1;i<arr.size();i++){
+//            minDiff=Math.min(minDiff,arr.get(i) - arr.get(i - window + 1));
+//        }
+//        return minDiff;
+
         Collections.sort(arr);
-        for(int i=window-1;i<arr.size();i++){
-            minDiff=Math.min(minDiff,arr.get(i) - arr.get(i - window + 1));
+        long minDiff=Long.MAX_VALUE;
+        int student=(int)m-1;
+        int end=arr.size()-student;
+        for(int i=0;i<end;i++){
+            minDiff=Math.min(minDiff,arr.get(i+student)-arr.get(i));
         }
         return minDiff;
     }

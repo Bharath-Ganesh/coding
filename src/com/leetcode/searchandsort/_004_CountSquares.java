@@ -1,5 +1,8 @@
 package com.leetcode.searchandsort;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * https://practice.geeksforgeeks.org/problems/count-squares3649/1
  * Consider a sample space S consisting of all perfect squares starting from 1, 4, 9 and so on.
@@ -17,9 +20,23 @@ public class _004_CountSquares {
 
     public static void main(String[] args) {
         int num = 3933355;
-        System.out.println(countSquares(num));
+        System.out.println(binarySearch(num));
 
 
+    }
+
+    private static int binarySearch(int n) {
+        double low = 1;
+        double high = n;
+        while (low <= high) {
+            double mid = low + (high - low) / 2;
+            if ( mid >=  (n / mid)) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return (int) high;
     }
 
     public static int countSquares(int num) {
@@ -30,7 +47,7 @@ public class _004_CountSquares {
         int target = num;
         while (start <= end) {
             int mid = (end - start) / 2 + start;
-            if (mid < (double) target /mid && (mid + 1) >= ((double) target / (mid + 1)) ) {
+            if (mid < (double) target / mid && (mid + 1) >= ((double) target / (mid + 1))) {
                 count = mid;
                 break;
             } else if ((target / mid) <= mid) {
@@ -39,6 +56,7 @@ public class _004_CountSquares {
                 start = mid + 1;
             }
         }
+
         return count;
 
     }

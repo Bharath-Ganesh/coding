@@ -40,7 +40,7 @@ public class CopyListWithRandomPointer {
         node5.random = node1;
 
 
-        Node head=copyRandomList(node1);
+        Node head = copyRandomList(node1);
         display(head);
     }
 
@@ -57,44 +57,81 @@ public class CopyListWithRandomPointer {
 
     public Node copyRandomList(Node head) {
 
-        if(head==null){
-            return head;
-        }
-        Node curr=head;
-        while(curr!=null){
-            Node newNode=new Node(curr.val);
-            newNode.next=curr.next;
-            curr.next=newNode;
-            curr=curr.next.next;
+        Node dummyHead = head;
+        while (head != null) {
+            Node newNode = new Node(head.val);
+            Node nextNode = head.next;
+            head.next = newNode;
+            newNode.next = nextNode;
+            head = head.next.next;
         }
 
-        curr=head;
-        while(curr!=null){
-            //curr.next.random=curr.random.next;
-            if(curr.next != null){
-                curr.next.random = (curr.random!= null) ? curr.random.next : null;
+
+        head = dummyHead;
+
+        Node newHead = head.next;
+        while (head != null) {
+            Node random = head.random;
+            Node cNode = head.next;
+            Node cRandom = random == null ? null : random.next;
+            cNode.random = cRandom;
+            head = head.next.next;
+        }
+
+        head = dummyHead;
+        while (head != null) {
+            Node cNode = head.next;
+            head.next = head.next.next;
+            if (cNode.next != null) {
+                cNode.next = cNode.next.next;
             }
-            curr=curr.next.next;
+            head = head.next;
         }
 
-
-        Node dummyHead=new Node(-1);
-        Node temp=dummyHead;
-        Node prevNode=head;
-        curr=head.next.next;
-
-        while(prevNode!=null){
-            temp.next=prevNode.next;
-            prevNode.next=curr;
-            prevNode=curr;
-            if(curr!=null && curr.next!=null){
-                curr=curr.next.next;
-            }
-            temp=temp.next;
-        }
-        return dummyHead.next;
+        return newHead;
 
     }
+
+//    public Node copyRandomList(Node head) {
+//
+//        if(head==null){
+//            return head;
+//        }
+//        Node curr=head;
+//        while(curr!=null){
+//            Node newNode=new Node(curr.val);
+//            newNode.next=curr.next;
+//            curr.next=newNode;
+//            curr=curr.next.next;
+//        }
+//
+//        curr=head;
+//        while(curr!=null){
+//            //curr.next.random=curr.random.next;
+//            if(curr.next != null){
+//                curr.next.random = (curr.random!= null) ? curr.random.next : null;
+//            }
+//            curr=curr.next.next;
+//        }
+//
+//
+//        Node dummyHead=new Node(-1);
+//        Node temp=dummyHead;
+//        Node prevNode=head;
+//        curr=head.next.next;
+//
+//        while(prevNode!=null){
+//            temp.next=prevNode.next;
+//            prevNode.next=curr;
+//            prevNode=curr;
+//            if(curr!=null && curr.next!=null){
+//                curr=curr.next.next;
+//            }
+//            temp=temp.next;
+//        }
+//        return dummyHead.next;
+//
+//    }
 
 
 }

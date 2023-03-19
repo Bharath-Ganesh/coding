@@ -1,8 +1,6 @@
 package com.leetcode.strings;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * 28. Implement strStr()
@@ -25,91 +23,95 @@ import java.util.List;
 public class _008_ImplementStr {
 
     public static void main(String[] args) {
-        String haystack = "aaabaaa", needle = "aaab";
-        System.out.println(strStr(haystack,needle));
+        _008_ImplementStr obj = new _008_ImplementStr();
+        String haystack = "leetcode", needle = "leeto";
+        System.out.println(obj.strStr(haystack, needle));
     }
 
-    public static int strStr(String haystack, String needle) {
-        if(needle.length()==0){
-            return 0;
-        }
-        if(needle.length()>haystack.length()){
-            return -1;
-        }
+    public int strStr(String haystack, String needle) {
+        int[] lps=lps(needle);
 
-        int[] lps=new int[needle.length()];
-        generateLPS(lps,needle);
-        int i=0;
-        int j=0;
-        while(i<haystack.length()){
-            if(haystack.charAt(i)==needle.charAt(j)){
-                i++;
-                j++;
-            }else {
-                if(j==0){
-                    i++;
+        for(int i=0;i<haystack.length();){
+            for(int j=0;j<needle.length();){
+                if(i<haystack.length() && haystack.charAt(i)==needle.charAt(j)){
+                    if(j==needle.length()-1){
+                        return (i+1)-needle.length();
+                    }
+                    i++;j++;
                 }else{
-                    j=lps[j-1];
+                    if(j==0){
+                        i++;
+                    }else{
+                        j=lps[j-1];
+                    }
                 }
             }
-
-            if(j==needle.length()){
-                return i-needle.length();
-            }
         }
-
-
         return -1;
     }
 
 
-    private static void generateLPS(int[] lps,String needle){
-        lps[0]=0;
-        int prevLPS=0;
+    private int[] lps(String word){
+        int n=word.length();
+        int prevLps=0;
         int i=1;
-        while(i<needle.length()){
-            if(needle.charAt(i)==needle.charAt(prevLPS)){
-                lps[i++]=++prevLPS;
+        int[] lps=new int[n];
+
+        while(i<n){
+            if(word.charAt(i)==word.charAt(prevLps)){
+                lps[i++]=++prevLps;
             }else{
-                if(prevLPS==0){
-                    lps[i++]=prevLPS;
+                if(prevLps==0){
+                    lps[i++]=prevLps;
                 }else{
-                    prevLPS=lps[prevLPS-1];
+                    prevLps=lps[prevLps-1];
                 }
             }
         }
+        return lps;
+
     }
 
-
-
-    public static int strStrBruteForce(String haystack, String needle) {
-        if (needle.length() == 0) {
-            return 0;
-        }
-
-        for (int i = 0; i < haystack.length(); i++) {
-            if (haystack.charAt(i) == needle.charAt(0)) {
-                if (checkPattern(haystack, i, needle)) {
-                    return i;
-                }
-            }
-        }
-        return -1;
-    }
-
-    private static boolean checkPattern(String haystack, int index, String needle) {
-        int j = 0;
-        int i = index;
-        if (haystack.length() - i < needle.length()) {
-            return false;
-        }
-        while (i < haystack.length() && j < needle.length()) {
-            if (haystack.charAt(i) != needle.charAt(j)) {
-                return false;
-            }
-            i++;
-            j++;
-        }
-        return true;
-    }
+//    public int strStr(String haystack, String needle) {
+//
+//        int n=haystack.length();
+//        int m=needle.length();
+//        int[] lps=computeLPS(needle);
+//        int i=0,j=0;
+//        while(i<n){
+//
+//            if(haystack.charAt(i)==needle.charAt(j)){
+//                i++;j++;
+//            }else{
+//                if(j!=0){
+//                    j=lps[j-1];
+//                }else{
+//                    i++;
+//                }
+//            }
+//            if(j==m){
+//                return (i)-m;
+//            }
+//        }
+//        return -1;
+//    }
+//
+//
+//    private int[] computeLPS(String needle){
+//        int n=needle.length();
+//        int[] lps=new int[n];
+//        int index=1,prevLPS=0;
+//        while(index<n){
+//            if(needle.charAt(index)==needle.charAt(prevLPS)){
+//                lps[index++]=++prevLPS;
+//            }else{
+//                if(prevLPS!=0){
+//                    prevLPS=lps[prevLPS-1];
+//                }else{
+//                    index++;
+//                }
+//            }
+//        }
+//        return lps;
+//    }
 }

@@ -17,49 +17,89 @@ import java.util.Random;
 public class _032_KthLargestElementInArray {
 
     public static void main(String[] args) {
-        int nums[] = {3,4,1,2,5,8,4};
-        int k=1;
-        System.out.println(findKthLargest(nums,k));
+        int nums[] = {7, 10, 4 ,3 ,20, 15};
+        int k=3;
+        System.out.println(kthSmallest(nums,k));
 
     }
 
-    private static int findKthLargest(int[] nums, int k) {
-        int index= nums.length-k;
+
+    public static int kthSmallest(int[] arr,int k)
+    {
+        //Your code here
+        k=k-1;
         int low=0;
-        int high=nums.length-1;
+        int high=arr.length-1;
         while(low<high){
-            int pIndex=partition(nums,low,high);
-            if(pIndex==index){
+            int pivot=findPivotElementIndex(arr,low,high);
+            if(pivot==k){
+                low=k;
                 break;
-            }else if(pIndex<index){
-                low=pIndex+1;
-            }else {
-                high=pIndex-1;
+            }else if(pivot < k){
+                low=pivot+1;
+            }else{
+                high=pivot-1;
             }
         }
-        return nums[index];
+        return arr[low];
     }
 
-    private static int partition(int[] nums, int low, int high) {
-      //  int randomIndex=low+new Random().nextInt(high-low);
-      //  swap(nums,randomIndex,high);
-        int pivotElement=nums[high];
-        int j=low;
+    public static int findPivotElementIndex(int[] arr,int low,int high){
+        int randomIndex=low+ new Random().nextInt(high-low);
+        swap(arr,randomIndex,high);
+        int pivotIndex=low;
         for(int i=low;i<high;i++){
-            if(nums[i]<pivotElement){
-                swap(nums,i,j++);
+            if(arr[i] < arr[high]){
+                swap(arr,pivotIndex++,i);
             }
         }
-        swap(nums,j,high);
-        return j;
-
+        swap(arr,pivotIndex,high);
+        return pivotIndex;
     }
 
-    private static void swap(int nums[],int i,int j){
-        int temp=nums[i];
-        nums[i]=nums[j];
-        nums[j]=temp;
+    public static void swap(int[] arr,int i,int j){
+        int temp=arr[i];
+        arr[i]=arr[j];
+        arr[j]=temp;
     }
+
+//    private static int findKthLargest(int[] nums, int k) {
+//        int index= nums.length-k;
+//        int low=0;
+//        int high=nums.length-1;
+//        while(low<high){
+//            int pIndex=partition(nums,low,high);
+//            if(pIndex==index){
+//                break;
+//            }else if(pIndex<index){
+//                low=pIndex+1;
+//            }else {
+//                high=pIndex-1;
+//            }
+//        }
+//        return nums[index];
+//    }
+//
+//    private static int partition(int[] nums, int low, int high) {
+//      //  int randomIndex=low+new Random().nextInt(high-low);
+//      //  swap(nums,randomIndex,high);
+//        int pivotElement=nums[high];
+//        int j=low;
+//        for(int i=low;i<high;i++){
+//            if(nums[i]<pivotElement){
+//                swap(nums,i,j++);
+//            }
+//        }
+//        swap(nums,j,high);
+//        return j;
+//
+//    }
+//
+//    private static void swap(int nums[],int i,int j){
+//        int temp=nums[i];
+//        nums[i]=nums[j];
+//        nums[j]=temp;
+//    }
 
 
 }

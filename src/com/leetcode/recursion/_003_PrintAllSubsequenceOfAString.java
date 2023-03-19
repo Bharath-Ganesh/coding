@@ -36,6 +36,7 @@ public class _003_PrintAllSubsequenceOfAString {
         return res;
     }
 
+
     private static void printAllSubsequenceOfAString(String word, List<List<Character>> res, List<Character> curr, int index) {
         if (index >= word.length()) {
             res.add(new ArrayList<>(curr));

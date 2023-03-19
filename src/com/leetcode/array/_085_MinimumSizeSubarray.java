@@ -20,41 +20,38 @@ package com.leetcode.array;
 public class _085_MinimumSizeSubarray {
 
     public static void main(String[] args) {
-        int[] nums={2,3,1,1,1,1,1};
-        int target=5;
+        int[] nums={2,3,1,2,4,3};
+        int target=7;
         System.out.println(minSubArrayLen(target,nums));
     }
 
     public static int minSubArrayLen(int target, int[] nums) {
 
-        int minSize = Integer.MAX_VALUE;
-        int sum=0;
+        int n=nums.length;
+        int minSize=n;
         int i=-1;
         int j=-1;
-
-        while (true){
-            boolean flag1=true;
-            boolean flag2=true;
-
-            while(i<nums.length-1 && sum<target){
-                i++;
-                sum+=nums[i];
-                flag1=false;
+        int sum=0;
+        while(true){
+            boolean flag1=false;
+            boolean flag2=false;
+            while(i<n-1 && sum<target){
+                sum+=nums[++i];
+                flag1=true;
             }
 
-            while (j<i && sum>=target){
-                j++;
-                sum-=nums[j];
-                minSize=Math.min(i-j+1,minSize);
-                flag2=false;
+            while(i>j && sum>=target){
+                int length=(i-j);
+                minSize=Math.min(length,minSize);
+                sum-=nums[++j];
+                flag2=true;
             }
 
-            if(flag1 && flag2){
+            if(!flag1 && !flag2){
                 break;
             }
-
         }
-        return minSize==Integer.MAX_VALUE?0:minSize;
+        return minSize;
 
     }
 }

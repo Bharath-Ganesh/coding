@@ -21,41 +21,82 @@ import java.util.stream.Collectors;
  * [2,6]
  * ]
  */
-public class _007_CombinationSum2 {
+public class  _007_CombinationSum2 {
 
     public static void main(String[] args) {
-        int[] candidates = {1,1,1,2,2};
+        int[] candidates = {2,5,2,1,2};
         int target = 5;
         System.out.println(combinationSum2(candidates, target));
     }
 
-    public static List<List<Integer>> combinationSum2(int[] arr, int sum) {
+//    public static List<List<Integer>> combinationSum22(int[] arr, int sum) {
+//
+//        List<List<Integer>> res = new ArrayList<>();
+//        List<Integer> curr = new ArrayList<>();
+//        int index = 0;
+//        Arrays.sort(arr);
+//        combinationSum2(arr, res, curr, sum, index);
+//        return res;
+//
+//    }
+//
+//    private static void combinationSum22(int[] arr, List<List<Integer>> res, List<Integer> curr, int sum, int index) {
+//
+//        if (sum == 0) {
+//            res.add(new ArrayList(curr));
+//            return;
+//        }
+//
+//        // pick at the index
+//        for (int i = index; i < arr.length; i++) {
+//            if (arr[i] > sum) {
+//                break;
+//            }
+//            if (i == index || arr[i] != arr[i - 1]) {
+//                curr.add(arr[i]);
+//                combinationSum2(arr, res, curr, sum - arr[i], i + 1);
+//                curr.remove(curr.size() - 1);
+//            }
+//        }
+//    }
+//
+//
+//    public static List<List<Integer>> combinationSum222(int[] candidates, int target) {
+//        List<List<Integer>> res=new ArrayList<>();
+//        List<Integer> currList=new ArrayList<>();
+//        int index=0;
+//        Arrays.sort(candidates);
+//        combinationSum2(candidates,target,currList,res,index);
+//        return res;
+//    }
 
-        List<List<Integer>> res = new ArrayList<>();
-        List<Integer> curr = new ArrayList<>();
-        int index = 0;
-        Arrays.sort(arr);
-        combinationSum2(arr, res, curr, sum, index);
+    public static List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> res=new ArrayList<>();
+        List<Integer> currList=new ArrayList<>();
+        int index=0;
+        Arrays.sort(candidates);
+        combinationSum2(candidates,target,currList,res,index);
         return res;
-
     }
 
-    private static void combinationSum2(int[] arr, List<List<Integer>> res, List<Integer> curr, int sum, int index) {
+    public static void combinationSum2(int[] candidates, int target,List<Integer> currList,List<List<Integer>> res,int index) {
 
-        if (sum == 0) {
-            res.add(new ArrayList(curr));
+
+
+        if(index>=candidates.length || target<0){
             return;
         }
 
-        // pick at the index
-        for (int i = index; i < arr.length; i++) {
-            if (arr[i] > sum) {
-                break;
-            }
-            if (i == index || arr[i] != arr[i - 1]) {
-                curr.add(arr[i]);
-                combinationSum2(arr, res, curr, sum - arr[i], i + 1);
-                curr.remove(curr.size() - 1);
+        if(target==0){
+            res.add(new ArrayList<>(currList));
+            return;
+        }
+
+        for(int i=index;i<candidates.length;i++){
+            if(i==index || candidates[i]!=candidates[i-1]){
+                currList.add(candidates[i]);
+                combinationSum2(candidates,target-candidates[i],currList,res,i+1);
+                currList.remove(currList.size()-1);
             }
         }
     }

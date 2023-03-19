@@ -27,6 +27,32 @@ public class NextGreaterElement {
 		System.out.println(Arrays.toString(greaterElementArray));
 	}
 
+
+	public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+
+		Stack<Integer> stack=new Stack();
+		int[] nge=new int[nums2.length];
+		nge[nums2.length-1]=-1;
+		for(int i=nums2.length-2;i>=0;i--){
+			int num=nums2[i];
+			while(!stack.empty() && stack.peek()<num){
+				stack.pop();
+			}
+			nge[i]=stack.empty()?-1:stack.peek();
+		}
+
+		int[] res=new int[nums1.length];
+		for(int i=0;i<nums1.length;i++){
+			for(int j=0;j<nums2.length;j++){
+				if(nums1[i]==nums2[j]){
+					res[i]=nge[j];
+					break;
+				}
+			}
+		}
+		return res;
+	}
+
 	private static int[] nextGreaterElementRightToLeftApproach(int[] arr) {
 
 		Stack<Integer> stack = new Stack<>();

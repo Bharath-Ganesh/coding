@@ -18,8 +18,8 @@ package com.leetcode.bits;
 public class _002_SingleNumber2 {
 
     public static void main(String[] args) {
-        int[] nums={0,1,0,1,99,0,1};
-        System.out.println(singleNumber(nums));
+        int[] nums={3,2,2,3,3,2,99};
+        System.out.println(singleNumberO_N(nums));
     }
 
     public static int singleNumber(int[] nums) {
@@ -35,5 +35,23 @@ public class _002_SingleNumber2 {
         }
        return ones;
 
+    }
+
+    public static int singleNumberO_N(int[] nums) {
+        int result=0;
+        for(int i=0;i<32;i++){
+            int count=0;
+            for(int j=0;j<nums.length;j++){
+                int num=nums[j];
+                num=num>>i;
+                if((num & 1)==1){
+                    count++;
+                }
+            }
+            if(count%3!=0){
+                result=1 << i | result;
+            }
+        }
+        return result;
     }
 }

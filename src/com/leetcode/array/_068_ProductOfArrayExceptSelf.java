@@ -24,22 +24,22 @@ public class _068_ProductOfArrayExceptSelf {
         System.out.println(Arrays.toString(productExceptSelf(nums)));
     }
 
-    public static int[] productExceptSelf(int[] nums) {
-        int[] res=new int[nums.length];
-        int product=1;
-        for(int i=0;i<nums.length;i++){
-            product=product*nums[i];;
-            res[i]=product;
+    public static long[] productExceptSelf(int nums[])
+    {
+        // code here
+        int n=nums.length;
+        long[] res=new long[n];
+        res[0]=nums[0];
+        for(int i=1;i<n-1;i++){
+            res[i]=res[i-1]*nums[i];
         }
-
-        int rightSum=nums[nums.length-1];
-        res[nums.length-1]=res[nums.length-2];
-        for(int i=nums.length-2;i>=1;i--){
-            res[i]=res[i-1]*rightSum;
-            rightSum*=nums[i];
+        res[n-1]=res[n-2];
+        int product=nums[n-1];
+        for(int i=n-2;i>0;i--){
+            res[i]=res[i-1]*product;
+            product=product*nums[i];
         }
-
-        res[0]=rightSum;
+        res[0]=product;
         return res;
     }
 }

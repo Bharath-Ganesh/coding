@@ -23,10 +23,10 @@ import java.util.Set;
  */
 public class _012_CustomersWhoCouldNotGetComputer {
     public static void main(String[] args) {
-        String sequence = "ABCBCAIIJJKKLMML";
-        Integer computers = 3;
+        String sequence = "ABCBCADEED";
+        Integer computers = 1;
         System.out.println(runCustomerSimulation(computers, sequence));
-        System.out.println(runCustomerSimulationGFG(computers, sequence.toCharArray()));
+        //System.out.println(runCustomerSimulationGFG(computers, sequence.toCharArray()));
     }
 
     private static int runCustomerSimulation(Integer computers, String sequence) {

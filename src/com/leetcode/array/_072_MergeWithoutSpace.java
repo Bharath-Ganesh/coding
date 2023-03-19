@@ -27,53 +27,51 @@ public class _072_MergeWithoutSpace {
     }
 
 
+    private static int nextGap(int gap) {
+        if (gap <= 1) {
+            return 0;
+        }
+        return (gap / 2) + (gap % 2);
+    }
+
     public static void mergeGapMethod(int arr1[], int arr2[], int n, int m) {
         // code here
-        int i,j;
-        int gap=n+m;
-        for(gap=nextGap(gap);gap>0;gap=nextGap(gap)){
+        int i, j;
+        //Gap method can be used to merge using an extra space
+        // Time complexity :  log(n)*n;
+        // gap= Ciel (n1+n2)/2;
+        int gap = n + m;
+        for (gap = nextGap(gap); gap > 0; gap = nextGap(gap)) {
 
-            for(i=0;i+gap<n;i++){
-                if(arr1[i]>arr1[i+gap]){
-                    swap(arr1,arr1,i,i+gap);
+            //When both the pointer are on the first array
+            for (i = 0; i + gap < n; i++) {
+                if (arr1[i] > arr1[i + gap]) {
+                    swap(arr1, arr1, i, i + gap);
                 }
             }
 
-
-            for(j=gap>n?gap-n:0;j<m && i<n;i++,j++){
-                if(arr1[i]>arr2[j]){
-                    swap(arr1,arr2,i,j);
+            //When  the 1st pointer is on the first array and second on the 2nd array
+            for (j = gap > n ? gap - n : 0; j < m && i < n; i++, j++) {
+                if (arr1[i] > arr2[j]) {
+                    swap(arr1, arr2, i, j);
                 }
             }
-
-            if(j<m){
-                for(j=0;j+gap<m;j++){
-                    if(arr2[j]>arr2[j+gap]){
-                        swap(arr2,arr2,j,j+gap);
+            if (j < m) {
+                //when both pointers are on the second array
+                for (j = 0; j + gap < m; j++) {
+                    if (arr2[j] > arr2[j + gap]) {
+                        swap(arr2, arr2, j, j + gap);
                     }
                 }
             }
         }
-
-        // arr2 iterator
-
     }
 
-    private static void swap(int[] arr1,int[] arr2,int pos1,int pos2){
-        int temp=arr1[pos1];
-        arr1[pos1]=arr2[pos2];
-        arr2[pos2]=temp;
+    private static void swap(int[] arr1, int[] arr2, int pos1, int pos2) {
+        int temp = arr1[pos1];
+        arr1[pos1] = arr2[pos2];
+        arr2[pos2] = temp;
     }
-
-    private static int nextGap(int gap){
-        if(gap<=1){
-            return 0;
-        }
-        return (gap/2)+(gap%2);
-    }
-
-
-
 
 
     public static void merge(int arr1[], int arr2[], int m, int n) {

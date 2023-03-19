@@ -19,24 +19,6 @@ public class BasicCalculator_3 {
         System.out.println(calculate(expression));
     }
 
-//    private static boolean calculate(String expression) {
-//        //create infix to post fix expression
-//        Stack<Character> operators= new Stack<>();
-//        Stack<Character> postFix=new Stack<>();
-//
-//        for (int i=0;i<expression.length();i++){
-//            Character ch=expression.charAt(i);
-//            if(ch=='('){
-//                operators.push(ch);
-//            }else if(Character.isDigit(ch)){
-//                postFix.push(ch);
-//            }else if(ch==')'){
-//
-//            }
-//        }
-//        return false;
-//    }
-
     public static int calculate(String s) {
         Stack<Integer> stack = new Stack<Integer>();
         int result = 0;
