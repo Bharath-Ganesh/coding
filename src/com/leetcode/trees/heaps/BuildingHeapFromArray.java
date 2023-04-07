@@ -19,9 +19,15 @@ public class BuildingHeapFromArray {
             heapify(arr, n, i);
         }
 
-        for(int i=n-1;i>=0;i--){
-            swap(arr,0,i);
-            heapify(arr,i,0);
+//        for(int i=n-1;i>=0;i--){
+//            swap(arr,0,i);
+//            heapify(arr,i,0);
+//        }
+
+
+        for(int i=0;i<n;i++){
+            swap(arr,0,n-1-i);
+            heapify(arr,n-1-i,0);
         }
     }
 
@@ -51,4 +57,8 @@ public class BuildingHeapFromArray {
             heapify(arr, n, largest);
         }
     }
+
+
+
+
 }

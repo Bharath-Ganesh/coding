@@ -3,7 +3,14 @@ package com.certifications.javase11.dataTypes;
 public class PrimitiveDataTypes {
     public static void main(String[] args) {
 
-        //1 . To initialize a float variable we need to provide f at the end
-        // float f=1.2;
+        /**
+         * To initialize a float variable, a variable with decimal point, we need to provide f at the end.
+         */
+        float d = 1.2f;
+        double dd = 1.2;
+
+
+        int i = 1;
+        long aa = 1l;
     }
 }

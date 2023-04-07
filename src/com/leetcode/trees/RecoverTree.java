@@ -38,6 +38,7 @@ public class RecoverTree {
     public void recoverSwappedTree(TreeNode root) {
         if (root == null) return;
 
+        recoverSwappedTree(root.left);
         if (prev != null && root.val < prev.val) {
             if (first == null) {
                 first = prev;
@@ -46,8 +47,8 @@ public class RecoverTree {
                 last = root;
             }
         }
-        prev = root;
-        recoverSwappedTree(root.left);
         recoverSwappedTree(root.right);
+        prev = root;
+
     }
 }

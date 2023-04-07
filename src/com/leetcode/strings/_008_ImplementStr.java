@@ -24,53 +24,119 @@ public class _008_ImplementStr {
 
     public static void main(String[] args) {
         _008_ImplementStr obj = new _008_ImplementStr();
-        String haystack = "leetcode", needle = "leeto";
+        String haystack = "sadbutsad", needle = "sad";
         System.out.println(obj.strStr(haystack, needle));
     }
 
     public int strStr(String haystack, String needle) {
-        int[] lps=lps(needle);
 
-        for(int i=0;i<haystack.length();){
-            for(int j=0;j<needle.length();){
-                if(i<haystack.length() && haystack.charAt(i)==needle.charAt(j)){
-                    if(j==needle.length()-1){
-                        return (i+1)-needle.length();
-                    }
-                    i++;j++;
-                }else{
-                    if(j==0){
-                        i++;
-                    }else{
-                        j=lps[j-1];
-                    }
-                }
+        int n=haystack.length();
+        int m=needle.length();
+
+        int totalLength=n+m+1;
+        char[] newString=new char[totalLength];
+
+        int i;
+
+        for(i=0;i<m;i++){
+            newString[i]=needle.charAt(i);
+        }
+
+        newString[i++]='$';
+
+        int index=0;
+        for(;i<totalLength;i++){
+            newString[i]=haystack.charAt(index++);
+        }
+
+        int[] z=computeZFunction(newString);
+
+        for(i=0;i<z.length;i++){
+            if(z[i]==needle.length()){
+                return i-1-m;
             }
         }
         return -1;
     }
 
+    private int[] computeZFunction(char[] word){
 
-    private int[] lps(String word){
-        int n=word.length();
-        int prevLps=0;
-        int i=1;
-        int[] lps=new int[n];
+        int n=word.length;
 
-        while(i<n){
-            if(word.charAt(i)==word.charAt(prevLps)){
-                lps[i++]=++prevLps;
+        int[] z=new int[n];
+
+        int left=0,right=0;
+
+        for(int k=1;k<word.length;k++){
+
+            if(k>right){
+                left=right=k;
+                while(right<n && word[right]==word[right-left]){
+                    right++;
+                }
+                z[k]=right-left;
+                right--;
             }else{
-                if(prevLps==0){
-                    lps[i++]=prevLps;
+                int k1=k-left;
+
+                if(z[k1]+k<=right){
+                    z[k]=z[k1];
                 }else{
-                    prevLps=lps[prevLps-1];
+                    left=k;
+                    while(right<n && word[right]==word[right-left]){
+                        right++;
+                    }
+                    z[k]=right-left;
+                    right--;
                 }
             }
         }
-        return lps;
-
+        return z;
     }
+
+//    public int strStr(String haystack, String needle) {
+//        int[] lps=lps(needle);
+//
+//        for(int i=0;i<haystack.length();){
+//            for(int j=0;j<needle.length();){
+//                if(i<haystack.length() && haystack.charAt(i)==needle.charAt(j)){
+//                    if(j==needle.length()-1){
+//                        return (i+1)-needle.length();
+//                    }
+//                    i++;j++;
+//                }else{
+//                    if(j==0){
+//                        i++;
+//                    }else{
+//                        j=lps[j-1];
+//                    }
+//                }
+//            }
+//        }
+//        return -1;
+//    }
+//
+//
+//    private int[] lps(String word){
+//        int n=word.length();
+//        int prevLps=0;
+//        int i=1;
+//        int[] lps=new int[n];
+//
+//        while(i<n){
+//            if(word.charAt(i)==word.charAt(prevLps)){
+//                lps[i++]=++prevLps;
+//            }else{
+//                if(prevLps==0){
+//                    lps[i++]=prevLps;
+//                }else{
+//                    prevLps=lps[prevLps-1];
+//                }
+//            }
+//        }
+//        return lps;
+//
+//    }
 
 //    public int strStr(String haystack, String needle) {
 //

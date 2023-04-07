@@ -7,7 +7,7 @@ public class TypeCasting {
         // 1. Type casting of short/byte/char to int datatype
         byte a = 3;
         byte b = 127;
-        //a. here you can see the addition of two byte variables are already promoted to the int data type
+        //a. here you can see the addition of two byte variables gets promoted to the int data type.
         int res1 = a + b;
 
         short c = 3;
