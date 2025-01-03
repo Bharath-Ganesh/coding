@@ -7,9 +7,14 @@ public class TopKFrequentElements {
 
     public static void main(String[] args) {
         TopKFrequentElements obj = new TopKFrequentElements();
+
+        List<Integer> list = Arrays.asList(1,5,2,3,8,15,12);
+        Collections.sort(list, (o1, o2) -> (o1 - o2) * -1);
+        System.out.println(list);
         int[] nums = {1, 1, 1, 2, 2, 3};
         int k = 2;
         int[] res = obj.topKFrequentUsingComparator(nums, k);
+        int[] res1 = obj.topKFrequent(nums, k);
         System.out.println(Arrays.toString(res));
     }
 
@@ -51,11 +56,14 @@ public class TopKFrequentElements {
         Map<Integer, Integer> map = new HashMap<>();
         Arrays.stream(nums).forEach(i -> map.put(i, map.getOrDefault(i, 0) + 1));
         int size = map.size();
+
         FreqPair[] fp = new FreqPair[size];
         int count = 0;
         for (Map.Entry<Integer, Integer> element : map.entrySet()) {
             fp[count++] = new FreqPair(element.getKey(), element.getValue());
         }
+
+
         PriorityQueue<FreqPair> minHeap = new PriorityQueue<>();
 
         int i;

@@ -28,8 +28,9 @@ public class _002_ReverseAString {
         if (start >= end) {
             return;
         }
-        reverseArrRecursively(arr, start+1, end-1);
         swap(arr, start, end);
+        reverseArrRecursively(arr, start+1, end-1);
+
 
     }
 

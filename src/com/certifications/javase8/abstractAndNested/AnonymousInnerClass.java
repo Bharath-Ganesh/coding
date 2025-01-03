@@ -46,7 +46,7 @@ public class AnonymousInnerClass {
         Age age= new Age() {
             @Override
             public void getAge() {
-                System.out.print("Age is " + x);
+                System.out.print("Age is " );
             }
         };
         age.getAge();

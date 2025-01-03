@@ -6,8 +6,10 @@ import java.util.Map;
 public class Sample {
 
 	public static void main(String[] args) {
-		String chocolates = minWindow("ADOBECODEBANC", "ABC");
-		System.out.println(chocolates);
+		String value="Line matches the illegal pattern 'System\\.(out)|(err)\\.print(ln)?\\('.";
+		System.out.println(value);
+//		String chocolates = minWindow("ADOBECODEBANC", "ABC");
+//		System.out.println(chocolates);
 
 	}
 

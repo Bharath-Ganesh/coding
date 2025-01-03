@@ -6,7 +6,7 @@ public class CountingSort {
 
 	public static void main(String[] args) {
 		// 0, 0, 2, 2, 3, 3, 3, 5
-		int[] arr = {4,2,1,8,9,6,5,2,4,8 };
+		int[] arr = {0, 0, 2, 2, 3, 3, 3, 5 };
 		int[] result = countingSort(arr);
 		System.out.println(Arrays.toString(arr));
 		System.out.println(Arrays.toString(result));

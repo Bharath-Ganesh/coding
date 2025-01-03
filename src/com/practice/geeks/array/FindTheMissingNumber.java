@@ -23,6 +23,8 @@ public class FindTheMissingNumber {
 
 	public static void main(String[] args) {
 		int arr[] = { 1, 2, 3, 4, 6 };
+		int arr2[] = {9,6,4,2,3,5,7,0,1};
+		System.out.println(missingNumber(arr2));
 		findTheMissingNumber(arr);
 		findTheMissingNumberUsingSumApproach(arr);
 
@@ -30,6 +32,34 @@ public class FindTheMissingNumber {
 
 	// second approach
 	// find the sum of all elements using n(n+1)/2 - sumofarray elements
+
+	public static int missingNumber(int[] nums) {
+
+		int n = nums.length;
+
+		for(int i=0;i<n;){
+			int pos = nums[i];
+			if(nums[i]<n && nums[i]!=nums[pos]){
+				swap(nums, i, pos);
+			}else{
+				i++;
+			}
+		}
+
+		for(int i=0; i<n; i++){
+			if(i!=nums[i]){
+				return i;
+			}
+		}
+
+		return n;
+	}
+
+	private static void swap(int[] nums, int a, int b){
+		int temp = nums[a];
+		nums[a] = nums[b];
+		nums[b] = temp;
+	}
 
 	private static void findTheMissingNumberUsingSumApproach(int[] arr) {
 

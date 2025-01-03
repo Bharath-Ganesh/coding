@@ -1,5 +1,9 @@
 package com.practice.mycodeschool.ds;
 
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 public class StackArrayImplementation_1 {
 
     int size=20;
@@ -7,6 +11,9 @@ public class StackArrayImplementation_1 {
     int top= -1;
 
     public static void main(String[] args) {
+        Queue<Integer> queue = new LinkedList<>();
+        Stack<Integer> stack = new Stack<>();
+
         StackArrayImplementation_1 obj=new StackArrayImplementation_1();
         obj.push(10);
         obj.push(20);

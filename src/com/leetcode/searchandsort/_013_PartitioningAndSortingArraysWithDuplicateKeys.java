@@ -42,8 +42,6 @@ public class _013_PartitioningAndSortingArraysWithDuplicateKeys {
         System.out.println(Arrays.toString(arr));
     }
 
-
-
     /*
        Three-way partitioning
     */
@@ -58,7 +56,9 @@ public class _013_PartitioningAndSortingArraysWithDuplicateKeys {
 
 
     public static Partition partition(int[] input, int begin, int end) {
-        int lt = begin, current = begin, gt = end;
+        int lt = begin;
+        int current = begin;
+        int gt = end;
         int partitioningValue = input[begin];
 
         while (current <= gt) {

@@ -31,8 +31,6 @@ public class _012_KthSmallestNumber {
     private static int[][] mergeIntervals(int[][] range) {
         List<int[]> list = new ArrayList<>();
 
-
-
         Arrays.sort(range, Comparator.comparingInt(value -> value[0]));
 
         int start = range[0][0];

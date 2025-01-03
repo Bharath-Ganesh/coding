@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Queue;
 
 public class ConvertBSTMinHeap {
+
     public static void main(String[] args) {
         Node node = constructTree();
         ConvertBSTMinHeap obj = new ConvertBSTMinHeap();

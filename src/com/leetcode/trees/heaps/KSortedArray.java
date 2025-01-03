@@ -1,6 +1,7 @@
 package com.leetcode.trees.heaps;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
@@ -19,6 +20,7 @@ public class KSortedArray {
 
 
     private void kSortedArray(int[] arr, int k) {
+
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         int index;
         for (index = 0; index <= k; index++) {

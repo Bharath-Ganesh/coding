@@ -21,14 +21,38 @@ public class _003_PrintAllSubsequenceOfAString {
 
     public static void main(String[] args) {
         String word = "abc";
-        System.out.println(printAllSubsequenceOfAString(word));
+        System.out.println(printAllSubsequenceOfAStringTrial(word));
 
-        Set<String> st = new HashSet<>();
-        subsequence(word, st);
-        System.out.println(st);
+//        Set<String> st = new HashSet<>();
+//        //subsequence(word, st);
+//        System.out.println(st);
     }
 
-    private static List<List<Character>> printAllSubsequenceOfAString(String word) {
+    private static List<String> printAllSubsequenceOfAStringTrial(String word) {
+
+        int n = word.length();
+        List<String> result = new ArrayList<>();
+        int index = 0;
+        StringBuilder wordToBeFormed = new StringBuilder();
+        printAllSubsequenceOfAString(index, result, wordToBeFormed, word);
+        return result;
+    }
+
+    private static void printAllSubsequenceOfAString(int index, List<String> result ,StringBuilder wordToBeFormed, String word) {
+
+        if(index == word.length()){
+            return ;
+        }
+
+        wordToBeFormed.append(word.charAt(index));
+        printAllSubsequenceOfAString(index+1, result, wordToBeFormed, word);
+        result.add(wordToBeFormed.toString());
+        wordToBeFormed.deleteCharAt(wordToBeFormed.length() - 1);
+        printAllSubsequenceOfAString(index+1, result, wordToBeFormed, word);
+
+    }
+
+        private static List<List<Character>> printAllSubsequenceOfAString(String word) {
         List<List<Character>> res = new ArrayList<>();
         List<Character> curr = new ArrayList<>();
         int index = 0;

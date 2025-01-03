@@ -8,7 +8,7 @@ public class BinaryTreePath {
     public static void main(String[] args) {
         BinaryTreePath obj = new BinaryTreePath();
         TreeNode root = obj.createNode();
-        System.out.println(obj.pathToGivenNode(root, 7));
+        System.out.println(obj.binaryTreePaths(root));
 
     }
 
@@ -28,29 +28,20 @@ public class BinaryTreePath {
 
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> res = new ArrayList<>();
-        binaryTreePaths(root, res, new ArrayList());
+        binaryTreePaths(root, res, "");
         return res;
     }
 
-    public void binaryTreePaths(TreeNode root, List<String> res, List<String> currList) {
-        if (root == null) {
+    public void binaryTreePaths(TreeNode root, List<String> result, String path) {
+        if(root == null) return;
+        if(root.left == null && root.right == null){
+            path +=root.val;
+            result.add(path);
             return;
         }
-
-        if (root.left == null && root.right == null) {
-            String path = "";
-            for (String element : currList) {
-                path += element + "->";
-            }
-            path += root.val;
-            res.add(path);
-            return;
-        }
-
-        currList.add(root.val + "");
-        binaryTreePaths(root.left, res, currList);
-        binaryTreePaths(root.right, res, currList);
-        currList.remove(currList.size() - 1);
+        path += root.val + "->";
+        binaryTreePaths(root.left, result, path);
+        binaryTreePaths(root.right, result, path);
     }
 
     public ArrayList<Integer> pathToGivenNode(TreeNode A, int B) {

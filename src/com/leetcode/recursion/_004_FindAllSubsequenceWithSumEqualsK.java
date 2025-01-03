@@ -21,9 +21,82 @@ public class _004_FindAllSubsequenceWithSumEqualsK {
 
     public static void main(String[] args) {
         int arr[] = {17, 18, 6, 11, 2, 4}, sum = 6;
-        System.out.println(findAllSubsequenceWithSumEqualsK(arr, sum));
-        System.out.println(findAllSubsequenceWithSumEqualsKSecond(arr, sum));
+        System.out.println(countSubsequenceWithSumEqualsKTrial(arr, 0, sum));
+        //System.out.println(findAllSubsequenceWithSumEqualsKSecond(arr, sum));
     }
+
+    private static List<List<Integer>> findAllSubsequenceWithSumEqualsKTrial(int arr[], int sum) {
+
+        int n = arr.length;
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        findAllSubsequenceWithSumEqualsKTrial(arr, 0, temp, result, sum);
+        return result;
+    }
+
+    private static List<List<Integer>> countSubsequenceWithSumEqualsKTrial(int arr[], int sum) {
+
+        int n = arr.length;
+        List<List<Integer>> result = new ArrayList<>();
+        countSubsequenceWithSumEqualsKTrial(arr, 0, sum);
+        return result;
+    }
+
+    private static int countSubsequenceWithSumEqualsKTrial(int arr[], int index, int sum) {
+
+        if(index == arr.length){
+            if(sum == 0){
+                return 1;
+            }
+            return 0;
+        }
+
+
+        int leftCount  = countSubsequenceWithSumEqualsKTrial(arr, index+1, sum - arr[index]);
+        int rightCount = countSubsequenceWithSumEqualsKTrial(arr,index+1, sum);
+        return leftCount + rightCount;
+    }
+
+
+    private static boolean findOneSubsequenceWithSumEqualsKTrial(int arr[], int index, List<Integer> temp, List<List<Integer>> result, int sum) {
+
+        if(index == arr.length){
+            if(sum == 0){
+                result.add(new ArrayList<>(temp));
+                return true;
+            }
+            return false;
+        }
+
+        temp.add(arr[index]);
+        boolean left = findOneSubsequenceWithSumEqualsKTrial(arr, index+1, temp, result, sum - arr[index]);
+
+        if(left) return true;
+
+        temp.remove(temp.size()-1);
+        boolean right = findOneSubsequenceWithSumEqualsKTrial(arr,index+1, temp, result, sum);
+        if(right) return true;
+
+        return false;
+    }
+
+    private static void findAllSubsequenceWithSumEqualsKTrial(int arr[], int index, List<Integer> temp, List<List<Integer>> result, int sum) {
+
+        if(index == arr.length){
+            if(sum == 0){
+                result.add(new ArrayList<>(temp));
+            }
+            return;
+        }
+
+        temp.add(arr[index]);
+        findAllSubsequenceWithSumEqualsKTrial(arr, index+1, temp, result, sum - arr[index]);
+
+        temp.remove(temp.size()-1);
+        findAllSubsequenceWithSumEqualsKTrial(arr,index+1, temp, result, sum);
+
+    }
+
 
     private static List<List<Integer>> findAllSubsequenceWithSumEqualsK(int[] arr, int sum) {
         List<List<Integer>> res = new ArrayList<>();

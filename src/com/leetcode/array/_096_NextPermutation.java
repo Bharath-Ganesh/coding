@@ -27,57 +27,99 @@ import java.util.Arrays;
 public class _096_NextPermutation {
 
     public static void main(String[] args) {
-        int[] nums = {2,1,3};
+        int[] nums = {7,6,5,4,3,2,1};
         nextPermutation(nums);
         System.out.println(Arrays.toString(nums));
     }
 
     public static void nextPermutation(int[] nums) {
 
-        int n=nums.length;
-        int index;
-        for(index=n-2;index>=0;index--){
-            // An increasing sequence will be observed from the end
-            // find the position at which first decreasing happens
-            // [1,2,6,5,4] => index=1
-            if(nums[index]<nums[index+1]){
+        int n = nums.length;
+        int pos = -1;
+
+        for(int i=n-2;i>=0;i--){
+            if(nums[i]<nums[i+1]){
+                pos=i;
                 break;
             }
         }
 
-        //if the array element are in decreasing order
-        // [5,4,3,2,1]
-        if(index==-1){
-            rotate(nums,0,n-1);
+        if(pos==-1) {
+            reverse(nums, 0, n-1);
             return;
         }
 
-        int swapPosition=0;
-        //Now find a number greater than the nums[index];
-        // This will be the starting of the next immediate permutation
-        //Start looking from the back to get the minmum
-        // [1,3,2]
-        for(int i=nums.length-1;i>index;i--){
-            if(nums[i]>nums[index]){
-                swapPosition=i;
+        for(int i=n-1;i>0;i--){
+            if(nums[i]>nums[pos]){
+                swap(nums, i, pos);
+                reverse(nums, pos+1, n-1);
                 break;
             }
         }
-        swap(nums,index,swapPosition);
-        rotate(nums,index+1,n-1);
 
     }
 
-
-    private static void swap(int[] nums, int i, int j) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
-    }
-
-    private static void rotate(int[] nums, int start, int end) {
-        while (start < end) {
-            swap(nums, start++, end--);
+    public static void reverse(int[] nums, int low, int high){
+        while(low<=high){
+            swap(nums, low, high);
+            low++;high--;
         }
     }
+
+    public static void swap(int[] nums, int a, int b){
+        int temp = nums[a];
+        nums[a] = nums[b];
+        nums[b] = temp;
+    }
+
+
+
+//    public static void nextPermutation(int[] nums) {
+//
+//        int n=nums.length;
+//        int index;
+//        for(index=n-2;index>=0;index--){
+//            // An increasing sequence will be observed from the end
+//            // find the position at which first decreasing happens
+//            // [1,2,6,5,4] => index=1
+//            if(nums[index]<nums[index+1]){
+//                break;
+//            }
+//        }
+//
+//        //if the array element are in decreasing order
+//        // [5,4,3,2,1]
+//        if(index==-1){
+//            rotate(nums,0,n-1);
+//            return;
+//        }
+//
+//        int swapPosition=0;
+//        //Now find a number greater than the nums[index];
+//        // This will be the starting of the next immediate permutation
+//        //Start looking from the back to get the minmum
+//        // [1,3,2]
+//        for(int i=nums.length-1;i>index;i--){
+//            if(nums[i]>nums[index]){
+//                swapPosition=i;
+//                break;
+//            }
+//        }
+//        swap(nums,index,swapPosition);
+//        rotate(nums,index+1,n-1);
+//
+//    }
+//
+//
+//    private static void swap(int[] nums, int i, int j) {
+//        int temp = nums[i];
+//        nums[i] = nums[j];
+//        nums[j] = temp;
+//    }
+//
+//    private static void rotate(int[] nums, int start, int end) {
+//        while (start < end) {
+//            swap(nums, start++, end--);
+//        }
+ //   }
 }

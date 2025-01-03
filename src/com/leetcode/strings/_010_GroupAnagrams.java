@@ -15,8 +15,6 @@ import java.util.*;
 public class _010_GroupAnagrams {
     public static void main(String[] args) {
         _010_GroupAnagrams obj = new _010_GroupAnagrams();
-        String words[] = {"bfj", "tro", "ffa", "rph"};
-        System.out.println(obj.Anagrams(words));
     }
 
     public List<List<String>> Anagrams(String[] words) {

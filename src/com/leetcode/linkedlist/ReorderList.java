@@ -4,37 +4,55 @@ public class ReorderList {
 
 
     public static void main(String[] args) {
+        ReorderList obj = new ReorderList();
         ListNode list1 = getLinkedNode();
-        reorderList(list1);
+        obj.reorderList(list1);
         display(list1);
     }
 
-    public static void reorderList(ListNode head) {
-        if (head == null || head.next == null) {
-            return;
+    public void reorderList(ListNode head) {
+        ListNode mid = middleNode(head);
+        ListNode newHead = reverseList(mid);
+
+        ListNode tempNode = head;
+        ListNode dummyHead = new ListNode(-1);
+        ListNode dHead = dummyHead;
+
+        while(tempNode!=null || newHead!=null){
+            if(tempNode!=null){
+                dummyHead.next = tempNode;
+                dummyHead = dummyHead.next;
+            }
+
+            if(dummyHead!=null){
+                dummyHead.next = newHead;
+                dummyHead = dummyHead.next;
+            }
+
+
+            if(head!=null) tempNode = tempNode.next;
+            if(newHead!=null) newHead = newHead.next;
         }
 
-        ListNode mid = findMiddleNode(head);
-        ListNode second = reverseList(mid);
-        ListNode first = head;
-
-        while (first != null && second != null) {
-            ListNode next = first.next;
-            first.next = second;
-            first = next;
-
-            next = second.next;
-            second.next = first;
-            second = next;
-        }
-
-        if (first != null) {
-            first.next = null;
-        }
+        head = dHead.next;
     }
 
-    public static ListNode reverseList(ListNode head) {
-        if (head == null || head.next == null) {
+    public ListNode middleNode(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode mid = null;
+        while(fast!=null && fast.next!=null){
+            mid = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        mid.next = null;
+        return slow;
+    }
+
+    public ListNode reverseList(ListNode head) {
+
+        if(head==null || head.next == null){
             return head;
         }
         ListNode nextNode = reverseList(head.next);
@@ -43,19 +61,54 @@ public class ReorderList {
         return nextNode;
     }
 
-    public static ListNode findMiddleNode(ListNode head) {
 
-        if (head == null) {
-            return head;
-        }
-        ListNode slow = head;
-        ListNode fast = head;
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-        return slow;
-    }
+//    public static void reorderList(ListNode head) {
+//        if (head == null || head.next == null) {
+//            return;
+//        }
+//
+//        ListNode mid = findMiddleNode(head);
+//        ListNode second = reverseList(mid);
+//        ListNode first = head;
+//
+//        while (first != null && second != null) {
+//            ListNode next = first.next;
+//            first.next = second;
+//            first = next;
+//
+//            next = second.next;
+//            second.next = first;
+//            second = next;
+//        }
+//
+//        if (first != null) {
+//            first.next = null;
+//        }
+//    }
+//
+//    public static ListNode reverseList(ListNode head) {
+//        if (head == null || head.next == null) {
+//            return head;
+//        }
+//        ListNode nextNode = reverseList(head.next);
+//        head.next.next = head;
+//        head.next = null;
+//        return nextNode;
+//    }
+//
+//    public static ListNode findMiddleNode(ListNode head) {
+//
+//        if (head == null) {
+//            return head;
+//        }
+//        ListNode slow = head;
+//        ListNode fast = head;
+//        while (fast != null && fast.next != null) {
+//            slow = slow.next;
+//            fast = fast.next.next;
+//        }
+//        return slow;
+//    }
 
     static void display(ListNode head) {
         ListNode temp = head;

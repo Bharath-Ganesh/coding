@@ -9,38 +9,53 @@ public class DeleteNodeInABST {
 
         String tree = "5,3,6,2,4,null,7";
         TreeNode root = UtilityTree.deserialize(tree);
-        int key = 3;
+        int key = 5;
         TreeNode treeNode = deleteNode(root, key);
+        System.out.println(treeNode);
+    }
+
+    private static TreeNode findMinFromRightSubTree(TreeNode root){
+        TreeNode min = root;
+        while(root!=null){
+            min = root;
+            root = root.left;
+        }
+        return min;
     }
 
     public static TreeNode deleteNode(TreeNode root, int key) {
 
-        if(root.val<key){
-            root.right=deleteNode(root.right,key);
-        }else if(root.val>key){
-            root.left=deleteNode(root.left,key);
+        if(root == null){
+            return null;
+        }
+
+        if(root.val < key){
+            root.right = deleteNode(root.right, key);
+        }else if(root.val > key){
+            root.left = deleteNode(root.left, key);
         }else{
-            //we found the node
-            //leaf node
-            if(root.left==null && root.right==null){
+            // Now the element is found
+            // leaf node
+            if(root.left == null && root.right == null){
                 return null;
-            }else if(root.left==null){
-                return root.right;
-            }else if(root.right==null){
-                return root.left;
-            }else{
-                //both the nodes contain value
-                TreeNode nextNode=root.right;
-                while(nextNode.left!=null){
-                    nextNode=nextNode.left;
-                }
-                deleteNode(root,nextNode.val);
-                root.val=nextNode.val;
-                return root;
             }
+            // left child null
+            else if(root.left == null){
+                root = root.right;
+            }
+            // right child null
+            else if( root.right == null){
+                root = root.left;
+            }
+            // 2 child
+            else {
+                TreeNode minSubTree = findMinFromRightSubTree(root.right);
+                root.val = minSubTree.val;
+                root.right = deleteNode(root.right, minSubTree.val);
+            }
+
         }
         return root;
-
     }
 
 //    public static TreeNode deleteNode(TreeNode root, int key) {
